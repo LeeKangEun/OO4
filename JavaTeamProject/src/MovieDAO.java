@@ -4,14 +4,16 @@ import java.util.*;
 public class MovieDAO {
 	   
 	   // DB 연동에 사용하는 변수 및 객체 
-	   String jdbcDriver = "com.mysql.jdbc.Driver";
-	   String jdbcUrl = "jdbc:mysql://192.168.43.220/test";
-	   Connection conn;
+	   private String jdbcDriver = "com.mysql.jdbc.Driver";
+	   private String jdbcUrl = "jdbc:mysql://localhost/test";
+	   private Connection conn;
 	   
-	   PreparedStatement pstmt;
-	   ResultSet rs;
+	   private PreparedStatement pstmt;
+	   private ResultSet rs;
 	   
-	   String sql; // sql문 string
+	   private View v; 
+	   
+	   private String sql; // sql문 string
 	   
 	   ArrayList<Movie> movieList; // db에서 가져온 영화 리스트를 저장할 리스트 
 	   /*
@@ -21,8 +23,11 @@ public class MovieDAO {
 	   */
 	   public MovieDAO() {
 	      // 초기화
+		  AppMain app = AppMain.getInstance(); // appmain 클래스를 받아옴
+		  app.setMovieDAO(this); // 자신의 객체를 set
 	      sql = "";
 	      movieList = new ArrayList<Movie>();
+	      v = app.getView(); // view 객체 받아옴 
 	   }
 	   
 	   public void connectDB() {
@@ -57,7 +62,9 @@ public class MovieDAO {
 	      sql += searchReq(_month, _nation, _rating); // 검색 조건에 맞는 sql문 작성 
 	      
 	      sql += " order by num_people desc limit 5"; // 추가 검색조건 삽입 
-	   
+	      
+	      System.out.println(sql);
+	      
 	      try{
 	         // 필요시 pstmt 그냥 tmt로 바꾸기 
 	         pstmt = conn.prepareStatement(sql); // sql문 생성
@@ -97,7 +104,7 @@ public class MovieDAO {
 	      if (!(_month.equals("전체"))) {
 	         // 전체가 아니면 월별 기간 검색문 추가 
 	         sql+= " where DATE(open_date) between '2017-" +_month 
-	               +"-01' and last_day(2017-"+_month +"-01)";
+	               +"-01' and last_day('2017-"+_month +"-01')";
 	      }
 	      // 전체로 검색한 경우 할 필요 x
 	      
@@ -128,11 +135,11 @@ public class MovieDAO {
 	      if (!(_rating.equals("전체"))) {
 	         if (!(_month.equals("전체")) || !(_nation.equals("전체"))) {
 	            // 위 조건이 하나라도 있는 경우 
-	            sql += " and rating = " + _rating; 
+	            sql += " and rating like " + "'"+ _rating + "%'"; 
 	         }
 	         // 위 조건이 둘다 전체인 경우 (없는 경우)
 	         else {
-	            sql += " where rating = " + _rating;
+	            sql += " where rating like " + "'"+ _rating + "%'";
 	         }   
 	      }
 	      // 조건이 전체인 경우 할 필요 x 

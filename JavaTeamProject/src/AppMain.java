@@ -6,14 +6,14 @@ public class AppMain {
 	private MovieDAO m_movieDAO;
 	private Movie movie;
 	
-	private AppMain(View v, MovieDAO md) {
-		m_view = v;
-		m_movieDAO = md;
+	private AppMain() {
+		
 	}
+	
 	public static AppMain getInstance() {
 		
 		if(s_instance == null) {
-			s_instance = new AppMain(new View(), new MovieDAO());
+			s_instance = new AppMain();
 		}
 		return s_instance;
 	}
@@ -41,12 +41,4 @@ public class AppMain {
 		return m_movieDAO;
 		
 	}
-
-	public static void main(String[] args) {
-	
-		AppMain ap = AppMain.getInstance();
-		
-	}
-
-
 }

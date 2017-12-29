@@ -1,14 +1,21 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.*;
 
 import javax.swing.*;
 
 public class View extends JFrame{
+	ArrayList<Movie> datas;
+	MovieDAO md;
 	
 	public View() {
+		AppMain.getInstance().setView(this); // view 객체를 appmain에 set 
 		
-		//AppMain.getInstance().setView(this);
+		AppMain app = AppMain.getInstance();
+		MovieDAO md = new MovieDAO(); // MovieDAO 객체 생성
+		datas = new ArrayList<Movie>();
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("관리 프로그램");
@@ -66,7 +73,7 @@ public class View extends JFrame{
 	
 		String[] strMonth = {"전체", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
 		String[] strNation = {"전체", "한국", "외국"};
-		String[] strRating = {"전체", "전체 관람가", "12세 이상 관람가", "15세 이상 관람가", "청소년 관람 불가"};
+		String[] strRating = {"전체", "전체관람가", "12세이상관람가", "15세이상관람가", "청소년관람불가"};
 		
 		JComboBox monthChoose = new JComboBox(strMonth);
 		JComboBox nationChoose = new JComboBox(strNation);
@@ -108,6 +115,15 @@ public class View extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				
 				chooseStandard(monthChoose, nationChoose, ratingChoose, current);
+				datas = md.sortPNum(monthChoose.getSelectedItem().toString(), 
+									nationChoose.getSelectedItem().toString(), ratingChoose.getSelectedItem().toString());
+				resultText.setText("");
+				System.out.println(ratingChoose.getSelectedItem().toString());
+				
+				for(Movie m : datas) {
+					resultText.append(m.getMvname() + "\t\t"+m.getRating() +"\n");
+					
+				}
 				
 			}			
 			
@@ -131,11 +147,10 @@ public class View extends JFrame{
 		
 	}
 
-	/*
+	
 	public static void main(String[] args) {
 		
 		new View();
-
 	}
-*/
+
 }
