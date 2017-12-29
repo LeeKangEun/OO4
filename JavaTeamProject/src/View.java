@@ -27,24 +27,28 @@ public class View extends JFrame{
 		JPanel func1 = new JPanel();
 		JPanel func2 = new JPanel();
 		JPanel result = new JPanel();
+		JPanel resultDetail = new JPanel();
 		
 		explain.setLayout(new BorderLayout());
 		standard.setLayout(new GridLayout(1, 6, 30, 0));
 		func1.setLayout(new GridLayout(1, 3, 100, 0));
 		func2.setLayout(new GridLayout(1, 3, 100, 0));
 		result.setLayout(new FlowLayout());
+		resultDetail.setLayout(new GridLayout(1,2));
 		
 		explain.setPreferredSize(new Dimension(800,70));
 		standard.setPreferredSize(new Dimension(800,30));
 		func1.setPreferredSize(new Dimension(800,70));
 		func2.setPreferredSize(new Dimension(800,70));
-		result.setPreferredSize(new Dimension(800,560));
+		result.setPreferredSize(new Dimension(800,280));
+		resultDetail.setPreferredSize(new Dimension(780,280));
 		
 		this.add(explain);
 		this.add(standard);
 		this.add(func1);
 		this.add(func2);
 		this.add(result);
+		this.add(resultDetail);
 		
 		
 		JLabel title = new JLabel("영화 분석");
@@ -105,7 +109,6 @@ public class View extends JFrame{
 		JTextArea resultText = new JTextArea();
 		resultText.setPreferredSize(new Dimension(780,480));
 		result.add(resultText);
-
 		
 		btn[0].addActionListener(new ActionListener() {
 			
