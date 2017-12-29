@@ -12,7 +12,11 @@ public class Movie {
 	private long income; // 매출액 
 	private int num_people; // 관람객 수
 	private String genre; // 장르
-	private String rating; // 관람등급 
+	private String rating; // 관람등급
+	
+	// 추가 결과값 계산 저장용 변수 
+	private float fResult; 
+	private String strResult;
 	// 이미지
 	
 	private Movie movie; // 객체 
@@ -76,6 +80,13 @@ public class Movie {
 		return rating;
 	}
 	
+	public float getFResult() {
+		return fResult;
+	}
+	public String strResult() {
+		return strResult;
+	}
+	
 	public void setMvcode(int _mvcode) {
 		mvcode = _mvcode;
 	}
@@ -105,5 +116,12 @@ public class Movie {
 	}
 	public void setRating(String _rating) {
 		rating = _rating;
+	}
+	
+	public void setFResult(float _result) {
+		fResult = _result;
+	}
+	public void setStrResult(String _result) {
+		strResult = _result;
 	}
 }
