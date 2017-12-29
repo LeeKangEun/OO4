@@ -12,14 +12,15 @@ public class MovieDAO {
 	PreparedStatement pstmt;
 	ResultSet rs;
 	
-	// 콤보박스 아이템 관리를 위한 벡터 
-	//Vector<String> items;
 	String sql; // sql문 string
 	
-	ArrayList<Movie> movieList;
+	ArrayList<Movie> movieList; // db에서 가져온 영화 리스트를 저장할 리스트 
+	
+	public static void main(String args[]){
+		new MovieDAO().sortPNum("1", "전체", "전체");
+	}
 	public MovieDAO() {
 		// 초기화
-		//items = null;
 		sql = "";
 		movieList = new ArrayList<Movie>();
 	}
@@ -45,4 +46,94 @@ public class MovieDAO {
 		}
 	} // DB 연결 종료 메소드
 	
+	public ArrayList<Movie> sortPNum(String _month, String _nation, String _rating) {
+		connectDB(); // DB 연결
+		sql = "select * from movie"; 
+		
+		// 검색한 전체 데이터를 받는 ArrayList
+		ArrayList<Movie> datas = new ArrayList<Movie>();
+		
+		// 월별 검색 조건 체크, 전체 검색을 하지 않은 경우  
+		if (!(_month.equals("전체"))) {
+			// 전체가 아니면 월별 기간 검색문 추가 
+			sql+= " where DATE(open_date) between '2017-" +_month 
+					+"-01' and last_day(2017-"+_month +"-01)";
+		}
+		// 전체로 검색한 경우 할 필요 x
+		
+		// 국가 검색 조건 체크, 한국인 경우 
+		if ((_nation.equals("한국"))) {
+			// 월별 검색 조건이 전체인 경우
+			if (_month.equals("전체")) {
+				sql += "where country = '한국'";				
+			}
+			// 월별 검색 조건이 전체가 아닌 경우
+			else {
+				sql += "and country = '한국'";	
+			}			
+		} 
+		// 국가 검색 조건이 외국인 경우 
+		else if ((_nation.equals("외국"))) {
+			// 월별 검색 조건이 전체인 경우
+			if (_month.equals("전체")) {
+				sql += "where country != '한국'";
+			}
+			// 월별 검색 조건이 전체가 아닌 경우
+			else {
+				sql += "and country != '한국'";
+			}
+		}
+		
+		// 관람등급 검색 조건 체크, 관람등급 검색을 전체로 하지 않은 경우
+		if (!(_rating.equals("전체"))) {
+			if (!(_month.equals("전체")) || !(_nation.equals("전체"))) {
+				// 위 조건이 하나라도 있는 경우 
+				sql += "and rating = " + _rating; 
+			}
+			// 위 조건이 둘다 전체인 경우 (없는 경우)
+			else {
+				sql += "where rating = " + _rating;
+			}	
+		}
+		// 조건이 전체인 경우 할 필요 x 
+		
+		sql += " order by num_people desc limit 5"; // 추가 검색조건 삽입 
+	
+		
+		try{
+			pstmt = conn.prepareStatement(sql); // sql문 생성
+			rs = pstmt.executeQuery(); // 입력받은 sql문 전송, 결과 데이터를 받음 
+			
+			while(rs.next()) {
+
+				Movie m = new Movie();
+				// db에서 받은 데이터 입력
+				/*
+				m.setPrcode(rs.getInt("prcode"));
+				m.setPrname(rs.getString("prname"));
+				m.setPrice(rs.getInt("price"));
+				m.setManufacture(rs.getString("Manufacture"));
+				*/
+				m.setMvcode(rs.getInt("mvcode")); // 영화 번호 
+				m.setMvname(rs.getString("mvname")); // 영화 제목 
+				m.setDrname(rs.getString("drname")); // 감독 이름 
+				m.setOpendate(rs.getDate("open_date")); // 개봉일
+				m.setCountry(rs.getString("country")); // 국적
+				m.setNumScreen(rs.getInt("num_screen")); // 스크린 수
+				m.setIncome(rs.getLong("income")); // 매출액
+				m.setNumPeople(rs.getInt("num_people")); // 관객 수
+				m.setGenre(rs.getString("genre")); // 장르
+				m.setRating(rs.getString("rating")); // 관람 등급 
+				datas.add(m); // 데이터를 arrayList에 저장
+			
+			} // while, 가져온 데이터 저장 
+
+			rs.close(); // close 
+		}catch(Exception e3) {
+			e3.printStackTrace();
+		}
+		
+		closeDB(); // DB 연결 종료 
+		return datas;
+	} // DB에서 전체 데이터를 가져옴 
 }
