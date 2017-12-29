@@ -7,7 +7,7 @@ public class AppMain {
 	private Movie movie;
 	
 	private AppMain() {
-		
+		System.out.println("teststs");
 	}
 	
 	public static AppMain getInstance() {
