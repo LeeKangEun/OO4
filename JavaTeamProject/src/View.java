@@ -98,22 +98,15 @@ public class View extends JFrame{
 		JTextArea resultText = new JTextArea();
 		resultText.setPreferredSize(new Dimension(780,480));
 		result.add(resultText);
-		// resultText.add(new JScrollPane());
+
 		
 		btn[0].addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				
-				String selectedMonth = (monthChoose.getSelectedItem().toString().equals("전체"))?
-						"" : (monthChoose.getSelectedItem().toString() +"월");
-				String selectedNation = (nationChoose.getSelectedItem().toString().equals("전체"))?
-						"" : (" " + nationChoose.getSelectedItem().toString());
-				String selectedRating = (ratingChoose.getSelectedItem().toString().equals("전체"))?
-						"" : (" " + ratingChoose.getSelectedItem().toString());
+				chooseStandard(monthChoose, nationChoose, ratingChoose, current);
 				
-				current.setText(selectedMonth + selectedNation + selectedRating);
-				
-			}
+			}			
 			
 		});
 			
@@ -121,6 +114,19 @@ public class View extends JFrame{
 		setVisible(true);
 		
 	} // view
+	
+	public void chooseStandard(JComboBox monthChoose, JComboBox nationChoose, JComboBox ratingChoose, JLabel current) {
+		
+		String selectedMonth = (monthChoose.getSelectedItem().toString().equals("전체"))?
+				"" : (monthChoose.getSelectedItem().toString() +"월");
+		String selectedNation = (nationChoose.getSelectedItem().toString().equals("전체"))?
+				"" : (" " + nationChoose.getSelectedItem().toString());
+		String selectedRating = (ratingChoose.getSelectedItem().toString().equals("전체"))?
+				"" : (" " + ratingChoose.getSelectedItem().toString());
+		
+		current.setText(selectedMonth + selectedNation + selectedRating);
+		
+	}
 
 	public static void main(String[] args) {
 		
