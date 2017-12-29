@@ -8,7 +8,7 @@ public class View extends JFrame{
 	
 	public View() {
 		
-		AppMain.getInstance().setView(this);
+		//AppMain.getInstance().setView(this);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("관리 프로그램");
@@ -128,10 +128,11 @@ public class View extends JFrame{
 		
 	}
 
+	/*
 	public static void main(String[] args) {
 		
 		new View();
 
 	}
-
+*/
 }

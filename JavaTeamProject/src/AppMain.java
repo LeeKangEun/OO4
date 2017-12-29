@@ -1,15 +1,20 @@
-
 public class AppMain {
 	
 	private static AppMain s_instance;
 	
 	private View m_view;
+	private MovieDAO m_movieDAO;
+	private Movie movie;
 	
+	private AppMain(View v, MovieDAO md) {
+		m_view = v;
+		m_movieDAO = md;
+	}
 	public static AppMain getInstance() {
 		
-		if(s_instance == null)
-			s_instance = new AppMain();
-		
+		if(s_instance == null) {
+			s_instance = new AppMain(new View(), new MovieDAO());
+		}
 		return s_instance;
 	}
 	
@@ -24,12 +29,24 @@ public class AppMain {
 		return m_view;
 		
 	}
-
-	public static void main(String[] args) {
+	
+	public void setMovieDAO(MovieDAO _movieDAO) {
 		
-		
-		
+		m_movieDAO = _movieDAO;	
 		
 	}
+	
+	public MovieDAO getMovieDAO() {
+		
+		return m_movieDAO;
+		
+	}
+
+	public static void main(String[] args) {
+	
+		AppMain ap = AppMain.getInstance();
+		
+	}
+
 
 }
