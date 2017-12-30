@@ -64,8 +64,6 @@ public class MovieDAO {
 	      
 	    sql += " order by num_people desc limit 5"; // 추가 검색조건 삽입 
 	      
-	    System.out.println(sql);
-	      
 	    try{
 	    	// 필요시 pstmt 그냥 tmt로 바꾸기 
 	        pstmt = conn.prepareStatement(sql); // sql문 생성
@@ -110,8 +108,6 @@ public class MovieDAO {
 	      
 	    sql += " order by income desc limit 5"; // 추가 검색조건 삽입 
 	      
-	    System.out.println(sql);
-	      
 	    try{
 	    	// 필요시 pstmt 그냥 tmt로 바꾸기 
 	        pstmt = conn.prepareStatement(sql); // sql문 생성
@@ -143,7 +139,7 @@ public class MovieDAO {
 	   closeDB(); // DB 연결 종료 
 	   return datas;
 	} // sortIncome(), DB에서 조건에 맞는 데이터를 가져옴
-   
+	
 	// 기준별 효율성 영화 top 5
 	public ArrayList<Movie> sortEffeciency(String _month, String _nation, String _rating) {
 	    connectDB(); // DB 연결
@@ -154,8 +150,6 @@ public class MovieDAO {
 	    sql += searchReq(_month, _nation, _rating); // 검색 조건에 맞는 sql문 작성 
 	      
 	    sql += " order by income/num_screen desc limit 5"; // 추가 검색조건 삽입 
-	      
-	    System.out.println(sql);
 	      
 	    try{
 	    	// 필요시 pstmt 그냥 tmt로 바꾸기 
@@ -204,8 +198,6 @@ public class MovieDAO {
 	      
 	    sql += " order by count(*) desc limit 5"; // 추가 검색조건 삽입 
 	      
-	    System.out.println(sql);
-	      
 	    try{
 	    	// 필요시 pstmt 그냥 tmt로 바꾸기 
 	        pstmt = conn.prepareStatement(sql); // sql문 생성
@@ -252,8 +244,6 @@ public class MovieDAO {
 	      
 	    sql += " order by count(*) desc limit 5"; // 추가 검색조건 삽입 
 	      
-	    System.out.println(sql);
-	      
 	    try{
 	    	// 필요시 pstmt 그냥 tmt로 바꾸기 
 	        pstmt = conn.prepareStatement(sql); // sql문 생성
@@ -286,6 +276,48 @@ public class MovieDAO {
 	   return datas;
 	} // sortSuccess(), DB에서 조건에 맞는 데이터를 가져옴
 	*/
+	
+	// 장르별 평균 매출액 
+	// 스크린 수 대신 영화 갯수 추가
+	public ArrayList<Movie> sortTheme() {
+	    connectDB(); // DB 연결
+	    sql = "select genre, avg(income) as 'avg_income', count(*) as 'num_movie' from movie group by genre order by count(*) desc";  // 기본 
+	    
+	    // 검색한 데이터를 받는 ArrayList
+	    ArrayList<Movie> datas = new ArrayList<Movie>();
+	    
+	    try{
+	    	// 필요시 pstmt 그냥 tmt로 바꾸기 
+	        pstmt = conn.prepareStatement(sql); // sql문 생성
+	        rs = pstmt.executeQuery(); // 입력받은 sql문 전송, 결과 데이터를 받음 
+	        
+	        while(rs.next()) {
+	        	
+	            Movie m = new Movie();
+
+	            //m.setMvcode(rs.getInt("mvcode")); // 영화 번호 
+	            //m.setMvname(rs.getString("mvname")); // 영화 제목 
+	            //m.setDrname(rs.getString("drname")); // 감독 이름 
+	            //m.setOpendate(rs.getDate("open_date")); // 개봉일
+	            //m.setCountry(rs.getString("country")); // 국적
+	            m.setNumScreen(rs.getInt("num_movie")); // 스크린 수 대신 영화 개수 
+	            //m.setIncome(rs.getLong("income")); // 매출액
+	            //m.setNumPeople(rs.getInt("num_people")); // 관객 수
+	            m.setGenre(rs.getString("genre")); // 장르
+	            //m.setRating(rs.getString("rating")); // 관람 등급 
+	            m.setFResult(rs.getFloat("avg_income")); // 평균 매출액    
+	            datas.add(m); // 데이터를 arrayList에 저장
+	         
+	        } // while, 가져온 데이터 저장 
+
+	        rs.close(); // close 
+	   }catch(Exception e7) {
+	        e7.printStackTrace();
+	   }
+	      
+	   closeDB(); // DB 연결 종료 
+	   return datas;
+	} // sortTheme(), DB에서 조건에 맞는 데이터를 가져옴
 	
 	// 검색 조건에 맞는 sql문을 작성하는 메소드 
 	private String searchReq(String _month, String _nation, String _rating) {
