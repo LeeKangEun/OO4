@@ -63,7 +63,7 @@ public class MovieDAO {
 	      
 	    sql += searchReq(_month, _nation, _rating); // 검색 조건에 맞는 sql문 작성 
 	      
-	    sql += " order by num_people desc limit 10"; // 추가 검색조건 삽입 
+	    sql += " order by num_people desc limit 15"; // 추가 검색조건 삽입 
 	      
 	    System.out.println(sql);
 	      
@@ -109,7 +109,7 @@ public class MovieDAO {
 	      
 	    sql += searchReq(_month, _nation, _rating); // 검색 조건에 맞는 sql문 작성 
 	      
-	    sql += " order by income desc limit 10"; // 추가 검색조건 삽입 
+	    sql += " order by income desc limit 15"; // 추가 검색조건 삽입 
 	      
 	    System.out.println(sql);
 	      
@@ -154,7 +154,7 @@ public class MovieDAO {
 	      
 	    sql += searchReq(_month, _nation, _rating); // 검색 조건에 맞는 sql문 작성 
 	      
-	    sql += " order by income/num_screen desc limit 10"; // 추가 검색조건 삽입 
+	    sql += " order by income/num_screen desc limit 15"; // 추가 검색조건 삽입 
 	      
 	    System.out.println(sql);
 	      
@@ -194,16 +194,20 @@ public class MovieDAO {
 	// 기준별 감독 기준 top 5
 	// 콤보박스 3개 조건 뺴도 될 것 같음 
 	// 스크린 수 대신 영화 갯수, 매출액 대신 누적 매출액 set함 
-	public ArrayList<Movie> sortDirector(String _month, String _nation, String _rating) {
+	public ArrayList<Movie> sortDirector(String _drname) {
+		
 	    connectDB(); // DB 연결
-	    sql = "select drname, count(*) as 'num_movie', sum(income) as 'sum_income' from movie";  // 기본 
+	    sql = "select * from movie";  // 기본
+	    sql += " where drname like " + "'%"+ _drname + "%'";
+	    sql += " order by drname"; // 추가 검색조건 삽입 
+	    
+	    // sql = "select drname, count(*) as 'num_movie', sum(income) as 'sum_income' from movie";  // 기본
+	    // sql += " order by count(*) desc limit 5"; // 추가 검색조건 삽입 
 	    
 	    // 검색한 데이터를 받는 ArrayList
 	    ArrayList<Movie> datas = new ArrayList<Movie>();
 	    
-	    //sql += searchReq(_month, _nation, _rating); // 검색 조건에 맞는 sql문 작성 
-	      
-	    sql += " order by count(*) desc limit 10"; // 추가 검색조건 삽입 
+	    //sql += searchReq(_month, _nation, _rating); // 검색 조건에 맞는 sql문 작성
 	      
 	    System.out.println(sql);
 	      
@@ -213,16 +217,16 @@ public class MovieDAO {
 	        rs = pstmt.executeQuery(); // 입력받은 sql문 전송, 결과 데이터를 받음 
 	        
 	        while(rs.next()) {
-	        	
-	            Movie m = new Movie();
+
+        		Movie m = new Movie();
 
 	            //m.setMvcode(rs.getInt("mvcode")); // 영화 번호 
-	            //m.setMvname(rs.getString("mvname")); // 영화 제목 
+	            m.setMvname(rs.getString("mvname")); // 영화 제목 
 	            m.setDrname(rs.getString("drname")); // 감독 이름 
 	            //m.setOpendate(rs.getDate("open_date")); // 개봉일
 	            //m.setCountry(rs.getString("country")); // 국적
-	            m.setNumScreen(rs.getInt("num_movie")); // 스크린 수 대신 
-	            m.setIncome(rs.getLong("sum_income")); // 매출액 대신 누적 매출액 
+	            m.setNumScreen(rs.getInt("num_screen")); // 스크린 수 
+	            m.setIncome(rs.getLong("income")); // 매출액 
 	            //m.setNumPeople(rs.getInt("num_people")); // 관객 수
 	            //m.setGenre(rs.getString("genre")); // 장르
 	            //m.setRating(rs.getString("rating")); // 관람 등급 
@@ -230,7 +234,8 @@ public class MovieDAO {
 	         
 	        } // while, 가져온 데이터 저장 
 
-	        rs.close(); // close 
+	        rs.close(); // close
+	        
 	   }catch(Exception e6) {
 	        e6.printStackTrace();
 	   }
@@ -278,8 +283,8 @@ public class MovieDAO {
 	        
 	        rs.close(); // close 
 
-	   }catch(Exception e6) {
-	        e6.printStackTrace();
+	   }catch(Exception e7) {
+	        e7.printStackTrace();
 	   }
 
 	   closeDB(); // DB 연결 종료 
@@ -322,14 +327,64 @@ public class MovieDAO {
 
            rs.close(); // close
            
-      }catch(Exception e7) {
-           e7.printStackTrace();
+      }catch(Exception e8) {
+           e8.printStackTrace();
       }
          
       closeDB(); // DB 연결 종료 
       
       return datas;
    } // sortTheme(), DB에서 조건에 맞는 데이터를 가져옴
+   
+   public ArrayList<Movie> sortWord(String word) {
+		
+	    connectDB(); // DB 연결
+	    
+	    sql = "select * from movie";  // 기본
+	    sql += " where mvname like " + "'%"+ word + "%'";
+	    sql += " order by mvname"; // 추가 검색조건 삽입  
+	    
+	    // 검색한 데이터를 받는 ArrayList
+	    ArrayList<Movie> datas = new ArrayList<Movie>();
+	    
+	    //sql += searchReq(_month, _nation, _rating); // 검색 조건에 맞는 sql문 작성
+	      
+	    System.out.println(sql);
+	      
+	    try{
+	    	// 필요시 pstmt 그냥 tmt로 바꾸기 
+	        pstmt = conn.prepareStatement(sql); // sql문 생성
+	        rs = pstmt.executeQuery(); // 입력받은 sql문 전송, 결과 데이터를 받음 
+	        
+	        while(rs.next()) {
+
+       		Movie m = new Movie();
+
+	            //m.setMvcode(rs.getInt("mvcode")); // 영화 번호 
+	            m.setMvname(rs.getString("mvname")); // 영화 제목 
+	            //m.setDrname(rs.getString("drname")); // 감독 이름 
+	            m.setOpendate(rs.getDate("open_date")); // 개봉일
+	            //m.setCountry(rs.getString("country")); // 국적
+	            //m.setNumScreen(rs.getInt("num_screen")); // 스크린 수 
+	            //m.setIncome(rs.getLong("income")); // 매출액 
+	            //m.setNumPeople(rs.getInt("num_people")); // 관객 수
+	            m.setGenre(rs.getString("genre")); // 장르
+	            m.setRating(rs.getString("rating")); // 관람 등급 
+	            datas.add(m); // 데이터를 arrayList에 저장
+	         
+	        } // while, 가져온 데이터 저장 
+
+	        rs.close(); // close
+	        
+	   }catch(Exception e9) {
+	        e9.printStackTrace();
+	   }
+	      
+	   closeDB(); // DB 연결 종료
+	   
+	   return datas;
+	   
+	} // sortWord(), DB에서 조건에 맞는 데이터를 가져옴
 	   
 	
 	// 검색 조건에 맞는 sql문을 작성하는 메소드 
