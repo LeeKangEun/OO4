@@ -4,10 +4,10 @@ public class AppMain {
 	
 	private View m_view;
 	private MovieDAO m_movieDAO;
-	private Movie movie;
+	// private Movie movie;
 	
 	private AppMain() {
-		System.out.println("Test");
+		
 	}
 	
 	public static AppMain getInstance() {
