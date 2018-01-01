@@ -39,16 +39,17 @@ public class MovieDAO {
 	} // DB 연결 메소드
 	   
 	public void closeDB() {
-	    try{
+	    try {
 	    	pstmt.close();
 	        conn.close();
-	    }catch(Exception e2) {
+	    } catch(Exception e2) {
 	        e2.printStackTrace();
 	    }
 	} // DB 연결 종료 메소드
 	   
 	// 기준 별 관람객 수 top 5 
 	public ArrayList<Movie> sortPNum(String _month, String _nation, String _rating) {
+		
 	    connectDB(); // DB 연결
 	    sql = "select * from movie";  // 기본 
 	    
@@ -58,8 +59,6 @@ public class MovieDAO {
 	    sql += searchReq(_month, _nation, _rating); // 검색 조건에 맞는 sql문 작성 
 	      
 	    sql += " order by num_people desc limit 15"; // 추가 검색조건 삽입 
-	      
-	    System.out.println(sql);
 	      
 	    try{
 	    	// 필요시 pstmt 그냥 tmt로 바꾸기 
@@ -85,16 +84,18 @@ public class MovieDAO {
 	        } // while, 가져온 데이터 저장 
 
 	        rs.close(); // close 
-	   }catch(Exception e3) {
+	   } catch(Exception e3) {
 	        e3.printStackTrace();
 	   }
 	      
 	   closeDB(); // DB 연결 종료 
+	   
 	   return datas;
 	} // sortPNum(), DB에서 조건에 맞는 데이터를 가져옴
 	
 	// 기준별 영화 매출액 수 top 5
 	public ArrayList<Movie> sortIncome(String _month, String _nation, String _rating) {
+		
 	    connectDB(); // DB 연결
 	    sql = "select * from movie";  // 기본 
 	    
@@ -102,10 +103,7 @@ public class MovieDAO {
 	    ArrayList<Movie> datas = new ArrayList<Movie>();
 	      
 	    sql += searchReq(_month, _nation, _rating); // 검색 조건에 맞는 sql문 작성 
-	      
 	    sql += " order by income desc limit 15"; // 추가 검색조건 삽입 
-	      
-	    System.out.println(sql);
 	      
 	    try{
 	    	// 필요시 pstmt 그냥 tmt로 바꾸기 
@@ -131,26 +129,25 @@ public class MovieDAO {
 	        } // while, 가져온 데이터 저장 
 
 	        rs.close(); // close 
-	   }catch(Exception e4) {
+	   } catch(Exception e4) {
 	        e4.printStackTrace();
 	   }
 	      
 	   closeDB(); // DB 연결 종료 
+	   
 	   return datas;
 	} // sortIncome(), DB에서 조건에 맞는 데이터를 가져옴
    
 	// 기준별 효율성 영화 top 5
 	public ArrayList<Movie> sortEffeciency(String _month, String _nation, String _rating) {
+		
 	    connectDB(); // DB 연결
 	    sql = "select *, income/num_screen as 'effeciency' from movie";  // 기본 sql문 
+	    sql += searchReq(_month, _nation, _rating); // 검색 조건에 맞는 sql문 작성 
+	    sql += " order by income/num_screen desc limit 15"; // 추가 검색조건 삽입
+	    
 	    // 검색한 데이터를 받는 ArrayList
 	    ArrayList<Movie> datas = new ArrayList<Movie>();
-	      
-	    sql += searchReq(_month, _nation, _rating); // 검색 조건에 맞는 sql문 작성 
-	      
-	    sql += " order by income/num_screen desc limit 15"; // 추가 검색조건 삽입 
-	      
-	    System.out.println(sql);
 	      
 	    try{
 	    	// 필요시 pstmt 그냥 tmt로 바꾸기 
@@ -177,11 +174,12 @@ public class MovieDAO {
 	        } // while, 가져온 데이터 저장 
 
 	        rs.close(); // close 
-	   }catch(Exception e5) {
+	   } catch(Exception e5) {
 	        e5.printStackTrace();
 	   }
 	      
 	   closeDB(); // DB 연결 종료 
+	   
 	   return datas;
 	} // sortEffeciency(), DB에서 조건에 맞는 데이터를 가져옴
 	
@@ -191,19 +189,13 @@ public class MovieDAO {
 	public ArrayList<Movie> sortDirector(String _drname) {
 		
 	    connectDB(); // DB 연결
+	    
 	    sql = "select * from movie";  // 기본
 	    sql += " where drname like " + "'%"+ _drname + "%'";
 	    sql += " order by drname"; // 추가 검색조건 삽입 
 	    
-	    // sql = "select drname, count(*) as 'num_movie', sum(income) as 'sum_income' from movie";  // 기본
-	    // sql += " order by count(*) desc limit 5"; // 추가 검색조건 삽입 
-	    
 	    // 검색한 데이터를 받는 ArrayList
 	    ArrayList<Movie> datas = new ArrayList<Movie>();
-	    
-	    //sql += searchReq(_month, _nation, _rating); // 검색 조건에 맞는 sql문 작성
-	      
-	    System.out.println(sql);
 	      
 	    try{
 	    	// 필요시 pstmt 그냥 tmt로 바꾸기 
@@ -235,24 +227,22 @@ public class MovieDAO {
 	   }
 	      
 	   closeDB(); // DB 연결 종료 
+	   
 	   return datas;
 	} // sortDirector(), DB에서 조건에 맞는 데이터를 가져옴
 	
-// 기준별 흥행작 top 5 < 누적 관객 수 100만 이상)
+	// 기준별 흥행작 top 5 < 누적 관객 수 100만 이상)
 	// 콤보박스 3개 조건 일단 뺌 
 
-	public ArrayList<Movie> sortSuccess(String _month, String _nation, String _rating) {
+	public ArrayList<Movie> sortSuccess() {
 
 	    connectDB(); // DB 연결
 	    sql = "select * from movie where num_people > 1000000 order by num_people desc;";  // 기본 
 
 	    // 검색한 데이터를 받는 ArrayList
 	    ArrayList<Movie> datas = new ArrayList<Movie>();
-	    //sql += searchReq(_month, _nation, _rating); // 검색 조건에 맞는 sql문 작성 
-	    //sql += " order by count(*) desc limit 5"; // 추가 검색조건 삽입 
 
 	    try{
-
 	    	// 필요시 pstmt 그냥 tmt로 바꾸기 
 
 	        pstmt = conn.prepareStatement(sql); // sql문 생성
@@ -289,7 +279,9 @@ public class MovieDAO {
 	
    // 스크린 수 대신 영화 갯수 추가
    public ArrayList<Movie> sortTheme() {
+	   
        connectDB(); // DB 연결
+       
        sql = "select genre, avg(income) as 'avg_income', count(*) as 'num_movie' from movie group by genre order by count(*) desc";  // 기본 
        
        // 검색한 데이터를 받는 ArrayList
@@ -340,10 +332,6 @@ public class MovieDAO {
 	    
 	    // 검색한 데이터를 받는 ArrayList
 	    ArrayList<Movie> datas = new ArrayList<Movie>();
-	    
-	    //sql += searchReq(_month, _nation, _rating); // 검색 조건에 맞는 sql문 작성
-	      
-	    System.out.println(sql);
 	      
 	    try{
 	    	// 필요시 pstmt 그냥 tmt로 바꾸기 
@@ -430,5 +418,5 @@ public class MovieDAO {
 	      
 	    return sql;
 	      
-	} // searchReq(), 
+	} // searchReq()
 }
