@@ -6,7 +6,7 @@ public class Movie {
 	private int mvcode; // 영화 코드
 	private String mvname; // 영화 이름
 	private String drname; // 감독 이름
-	private Date open_date;// 개봉일 string, date 어떤걸로 할지 생각
+	private Date open_date;// 개봉일 date
 	private String country; // 국적
 	private int num_screen; // 개봉 스크린 수
 	private long income; // 매출액 
