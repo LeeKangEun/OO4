@@ -54,7 +54,6 @@ public class View extends JFrame{
 		this.add(result);
 		this.add(resultDetail);
 		
-		
 		JLabel title = new JLabel("¿µÈ­°¡ ±Ã±ÝÇØ~");
 		title.setFont(new Font("±Ã¼­", 0, 35));
 		title.setHorizontalAlignment(JLabel.CENTER);

@@ -17,12 +17,6 @@ public class MovieDAO {
 	   
 	ArrayList<Movie> movieList; // db에서 가져온 영화 리스트를 저장할 리스트
 	
-	/*
-	public static void main(String args[]){
-	   new MovieDAO().sortPNum("1", "전체", "전체");
-	} // test 
-	*/
-	
 	public MovieDAO() {
 	   // 초기화
 		AppMain app = AppMain.getInstance(); // appmain 클래스를 받아옴
