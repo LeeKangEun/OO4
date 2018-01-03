@@ -2,31 +2,31 @@ import java.util.Date;
 
 public class Movie {
 	
-	// ¿µÈ­ Á¤º¸ º¯¼öµé 
-	private int mvcode; // ¿µÈ­ ÄÚµå
-	private String mvname; // ¿µÈ­ ÀÌ¸§
-	private String drname; // °¨µ¶ ÀÌ¸§
-	private Date open_date;// °³ºÀÀÏ date
-	private String country; // ±¹Àû
-	private int num_screen; // °³ºÀ ½ºÅ©¸° ¼ö
-	private long income; // ¸ÅÃâ¾× 
-	private int num_people; // °ü¶÷°´ ¼ö
-	private String genre; // Àå¸£
-	private String rating; // °ü¶÷µî±Ş
+	// ì˜í™” ì •ë³´ ë³€ìˆ˜ë“¤ 
+	private int mvcode; // ì˜í™” ì½”ë“œ
+	private String mvname; // ì˜í™” ì´ë¦„
+	private String drname; // ê°ë… ì´ë¦„
+
+	private String country; // êµ­ì 
+	private int num_screen; // ê°œë´‰ ìŠ¤í¬ë¦° ìˆ˜
+	private long income; // ë§¤ì¶œì•¡ 
+	private int num_people; // ê´€ëŒê° ìˆ˜
+	private String genre; // ì¥ë¥´
+	private String rating; // ê´€ëŒë“±ê¸‰
 	
-	// Ãß°¡ °á°ú°ª °è»ê ÀúÀå¿ë º¯¼ö 
+	// ì¶”ê°€ ê²°ê³¼ê°’ ê³„ì‚° ì €ì¥ìš© ë³€ìˆ˜ 
 	private float fResult; 
 	private String strResult;
-	// ÀÌ¹ÌÁö
+	// ì´ë¯¸ì§€
 	
-	private Movie movie; // °´Ã¼ 
+	private Movie movie; // ê°ì²´ 
 	
-	// »ı¼ºÀÚ
+	// ìƒì„±ì
 	public Movie() {
 		
 	}
 	
-	// »ı¼ºÀÚ ¿À¹ö·Îµù 
+	// ìƒì„±ì ì˜¤ë²„ë¡œë”© 
 	public Movie(int _mvcode, String _mvname, String _drname, Date _open_date, String _country, int _num_screen,
 				 long _income, int _num_people, String _genre, String _rating) {
 		mvcode = _mvcode;
