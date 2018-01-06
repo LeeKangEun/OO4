@@ -6,7 +6,7 @@ public class Movie {
 	private int mvcode; // 영화 코드
 	private String mvname; // 영화 이름
 	private String drname; // 감독 이름
-	private Date open_date;// 개봉일 date
+	private Date open_date;// 개봉일
 	private String country; // 국적
 	private int num_screen; // 개봉 스크린 수
 	private long income; // 매출액 
@@ -17,7 +17,6 @@ public class Movie {
 	// 추가 결과값 계산 저장용 변수 
 	private float fResult; 
 	private String strResult;
-	// 이미지
 	
 	private Movie movie; // 객체 
 	
@@ -45,7 +44,7 @@ public class Movie {
 		movie = _movie;
 	}
 	
-	// get, set
+	// get, set 메소드
 	public Movie getMovie() {
 		return movie;
 	}
