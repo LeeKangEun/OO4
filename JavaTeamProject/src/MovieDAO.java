@@ -3,7 +3,7 @@ import java.util.*;
 
 public class MovieDAO {
 	
-	// DB ¿¬µ¿¿¡ »ç¿ëÇÏ´Â º¯¼ö ¹× °´Ã¼ 
+	// DB ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ã¼ 
 	private String jdbcDriver = "com.mysql.jdbc.Driver";
 	private String jdbcUrl = "jdbc:mysql://localhost/test";
 	private Connection conn;
@@ -11,32 +11,32 @@ public class MovieDAO {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	   
-	private View v; // View Å¬·¡½º °´Ã¼ ¼±¾ð
+	private View v; // View Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 	   
-	private String sql; // sql¹® string
+	private String sql; // sqlï¿½ï¿½ string
 	   
-	ArrayList<Movie> movieList; // db¿¡¼­ °¡Á®¿Â ¿µÈ­ ¸®½ºÆ®¸¦ ÀúÀåÇÒ ¸®½ºÆ®
+	ArrayList<Movie> movieList; // dbï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	
-	public MovieDAO() { // »ý¼ºÀÚ
-	   // ÃÊ±âÈ­
-		AppMain app = AppMain.getInstance(); // appmain Å¬·¡½º¸¦ ¹Þ¾Æ¿È
-		app.setMovieDAO(this); // ÀÚ½ÅÀÇ °´Ã¼¸¦ set
+	public MovieDAO() { // ï¿½ï¿½ï¿½ï¿½
+	   // ï¿½Ê±ï¿½È­
+		AppMain app = AppMain.getInstance(); // appmain Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½
+		app.setMovieDAO(this); // ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ set
 	    sql = "";
 	    movieList = new ArrayList<Movie>();
-	    v = app.getView(); // view °´Ã¼ ¹Þ¾Æ¿È 
+	    v = app.getView(); // view ï¿½ï¿½Ã¼ ï¿½Þ¾Æ¿ï¿½ 
 	}
 	   
 	public void connectDB() {
 	    try{ 
 
-	        Class.forName(jdbcDriver); // 1. JDBC µå¶óÀÌ¹ö ·Îµå
+	        Class.forName(jdbcDriver); // 1. JDBC ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ ï¿½Îµï¿½
 	         
-	        conn = DriverManager.getConnection(jdbcUrl, "root", "rhtjrgh1"); // 2. DB ¿¬°á
+	        conn = DriverManager.getConnection(jdbcUrl, "root", "rhtjrgh1"); // 2. DB ï¿½ï¿½ï¿½ï¿½
 	        
 	    } catch(Exception e1) {
 	        e1.printStackTrace();
 	    }
-	} // DB ¿¬°á ¸Þ¼Òµå
+	} // DB ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼Òµï¿½
 	   
 	public void closeDB() {
 		
@@ -49,43 +49,43 @@ public class MovieDAO {
 	        e2.printStackTrace();
 	    }
 	    
-	} // DB ¿¬°á Á¾·á ¸Þ¼Òµå
+	} // DB ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Þ¼Òµï¿½
 	   
-	// ±âÁØ º° °ü¶÷°´ ¼ö top 5 
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ top 5 
 	public ArrayList<Movie> sortPNum(String _year, String _month, String _nation, String _rating) {
 		
-	    connectDB(); // DB ¿¬°á
-	    sql = "select * from movie";  // ±âº» 
+	    connectDB(); // DB ï¿½ï¿½ï¿½ï¿½
+	    sql = "select * from movie";  // ï¿½âº» 
 	    
-	    // °Ë»öÇÑ µ¥ÀÌÅÍ¸¦ ¹Þ´Â ArrayList
+	    // ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Þ´ï¿½ ArrayList
 	    ArrayList<Movie> datas = new ArrayList<Movie>();
 	      
-	    sql += searchReq(_year, _month, _nation, _rating); // °Ë»ö Á¶°Ç¿¡ ¸Â´Â sql¹® ÀÛ¼º 
+	    sql += searchReq(_year, _month, _nation, _rating); // ï¿½Ë»ï¿½ ï¿½ï¿½Ç¿ï¿½ ï¿½Â´ï¿½ sqlï¿½ï¿½ ï¿½Û¼ï¿½ 
 	      
-	    sql += " order by num_people desc limit 15"; // Ãß°¡ °Ë»öÁ¶°Ç »ðÀÔ 
+	    sql += " order by num_people desc limit 15"; // ï¿½ß°ï¿½ ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 	      
 	    try{
-	    	// ÇÊ¿ä½Ã pstmt ±×³É tmt·Î ¹Ù²Ù±â 
-	        pstmt = conn.prepareStatement(sql); // sql¹® »ý¼º
-	        rs = pstmt.executeQuery(); // ÀÔ·Â¹ÞÀº sql¹® Àü¼Û, °á°ú µ¥ÀÌÅÍ¸¦ ¹ÞÀ½ 
+	    	// ï¿½Ê¿ï¿½ï¿½ pstmt ï¿½×³ï¿½ tmtï¿½ï¿½ ï¿½Ù²Ù±ï¿½ 
+	        pstmt = conn.prepareStatement(sql); // sqlï¿½ï¿½ ï¿½ï¿½
+	        rs = pstmt.executeQuery(); // ï¿½Ô·Â¹ï¿½ï¿½ sqlï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ 
 	         
 	        while(rs.next()) {
 	        	
 	            Movie m = new Movie();
 
-	            m.setMvcode(rs.getInt("mvcode")); // ¿µÈ­ ¹øÈ£ 
-	            m.setMvname(rs.getString("mvname")); // ¿µÈ­ Á¦¸ñ 
-	            m.setDrname(rs.getString("drname")); // °¨µ¶ ÀÌ¸§ 
-	            m.setOpendate(rs.getDate("open_date")); // °³ºÀÀÏ
-	            m.setCountry(rs.getString("country")); // ±¹Àû
-	            m.setNumScreen(rs.getInt("num_screen")); // ½ºÅ©¸° ¼ö
-	            m.setIncome(rs.getLong("income")); // ¸ÅÃâ¾×
-	            m.setNumPeople(rs.getInt("num_people")); // °ü°´ ¼ö
-	            m.setGenre(rs.getString("genre")); // Àå¸£
-	            m.setRating(rs.getString("rating")); // °ü¶÷ µî±Þ 
-	            datas.add(m); // µ¥ÀÌÅÍ¸¦ arrayList¿¡ ÀúÀå
+	            m.setMvcode(rs.getInt("mvcode")); // ï¿½ï¿½È­ ï¿½ï¿½È£ 
+	            m.setMvname(rs.getString("mvname")); // ï¿½ï¿½È­ ï¿½ï¿½ï¿½ 
+	            m.setDrname(rs.getString("drname")); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ 
+	            m.setOpendate(rs.getDate("open_date")); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	            m.setCountry(rs.getString("country")); // ï¿½ï¿½ï¿½ï¿½
+	            m.setNumScreen(rs.getInt("num_screen")); // ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½
+	            m.setIncome(rs.getLong("income")); // ï¿½ï¿½ï¿½ï¿½ï¿½
+	            m.setNumPeople(rs.getInt("num_people")); // ï¿½ï¿½ ï¿½ï¿½
+	            m.setGenre(rs.getString("genre")); // ï¿½å¸£
+	            m.setRating(rs.getString("rating")); // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 
+	            datas.add(m); // ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ arrayListï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	         
-	        } // while, °¡Á®¿Â µ¥ÀÌÅÍ ÀúÀå 
+	        } // while, ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 
 	        rs.close(); // close
 	        
@@ -93,46 +93,46 @@ public class MovieDAO {
 	        e3.printStackTrace();
 	   }
 	      
-	   closeDB(); // DB ¿¬°á Á¾·á 
+	   closeDB(); // DB ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 
 	   
 	   
 	   return datas;
-	} // sortPNum(), DB¿¡¼­ Á¶°Ç¿¡ ¸Â´Â µ¥ÀÌÅÍ¸¦ °¡Á®¿È
+	} // sortPNum(), DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¿ï¿½ ï¿½Â´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 	
-	// ±âÁØº° ¿µÈ­ ¸ÅÃâ¾× ¼ö top 5
+	// ï¿½ï¿½ï¿½Øºï¿½ ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ top 5
 	public ArrayList<Movie> sortIncome(String _year, String _month, String _nation, String _rating) {
 		
-	    connectDB(); // DB ¿¬°á
-	    sql = "select * from movie";  // ±âº» 
+	    connectDB(); // DB ï¿½ï¿½ï¿½ï¿½
+	    sql = "select * from movie";  // ï¿½âº» 
 	    
-	    // °Ë»öÇÑ µ¥ÀÌÅÍ¸¦ ¹Þ´Â ArrayList
+	    // ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Þ´ï¿½ ArrayList
 	    ArrayList<Movie> datas = new ArrayList<Movie>();
 	      
-	    sql += searchReq(_year, _month, _nation, _rating); // °Ë»ö Á¶°Ç¿¡ ¸Â´Â sql¹® ÀÛ¼º 
-	    sql += " order by income desc limit 15"; // Ãß°¡ °Ë»öÁ¶°Ç »ðÀÔ 
+	    sql += searchReq(_year, _month, _nation, _rating); // ï¿½Ë»ï¿½ ï¿½ï¿½Ç¿ï¿½ ï¿½Â´ï¿½ sqlï¿½ï¿½ ï¿½Û¼ï¿½ 
+	    sql += " order by income desc limit 15"; // ï¿½ß°ï¿½ ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 	      
 	    try{
-	    	// ÇÊ¿ä½Ã pstmt ±×³É tmt·Î ¹Ù²Ù±â 
-	        pstmt = conn.prepareStatement(sql); // sql¹® »ý¼º
-	        rs = pstmt.executeQuery(); // ÀÔ·Â¹ÞÀº sql¹® Àü¼Û, °á°ú µ¥ÀÌÅÍ¸¦ ¹ÞÀ½ 
+	    	// ï¿½Ê¿ï¿½ï¿½ pstmt ï¿½×³ï¿½ tmtï¿½ï¿½ ï¿½Ù²Ù±ï¿½ 
+	        pstmt = conn.prepareStatement(sql); // sqlï¿½ï¿½ ï¿½ï¿½
+	        rs = pstmt.executeQuery(); // ï¿½Ô·Â¹ï¿½ï¿½ sqlï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ 
 	        
 	        while(rs.next()) {
 	        	
 	            Movie m = new Movie();
 
-	            m.setMvcode(rs.getInt("mvcode")); // ¿µÈ­ ¹øÈ£ 
-	            m.setMvname(rs.getString("mvname")); // ¿µÈ­ Á¦¸ñ 
-	            m.setDrname(rs.getString("drname")); // °¨µ¶ ÀÌ¸§ 
-	            m.setOpendate(rs.getDate("open_date")); // °³ºÀÀÏ
-	            m.setCountry(rs.getString("country")); // ±¹Àû
-	            m.setNumScreen(rs.getInt("num_screen")); // ½ºÅ©¸° ¼ö
-	            m.setIncome(rs.getLong("income")); // ¸ÅÃâ¾×
-	            m.setNumPeople(rs.getInt("num_people")); // °ü°´ ¼ö
-	            m.setGenre(rs.getString("genre")); // Àå¸£
-	            m.setRating(rs.getString("rating")); // °ü¶÷ µî±Þ 
-	            datas.add(m); // µ¥ÀÌÅÍ¸¦ arrayList¿¡ ÀúÀå
+	            m.setMvcode(rs.getInt("mvcode")); // ï¿½ï¿½È­ ï¿½ï¿½È£ 
+	            m.setMvname(rs.getString("mvname")); // ï¿½ï¿½È­ ï¿½ï¿½ï¿½ 
+	            m.setDrname(rs.getString("drname")); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ 
+	            m.setOpendate(rs.getDate("open_date")); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	            m.setCountry(rs.getString("country")); // ï¿½ï¿½ï¿½ï¿½
+	            m.setNumScreen(rs.getInt("num_screen")); // ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½
+	            m.setIncome(rs.getLong("income")); // ï¿½ï¿½ï¿½ï¿½ï¿½
+	            m.setNumPeople(rs.getInt("num_people")); // ï¿½ï¿½ ï¿½ï¿½
+	            m.setGenre(rs.getString("genre")); // ï¿½å¸£
+	            m.setRating(rs.getString("rating")); // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 
+	            datas.add(m); // ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ arrayListï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	         
-	        } // while, °¡Á®¿Â µ¥ÀÌÅÍ ÀúÀå 
+	        } // while, ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 
 	        rs.close(); // close
 	        
@@ -140,94 +140,94 @@ public class MovieDAO {
 	        e4.printStackTrace();
 	   }
 	      
-	   closeDB(); // DB ¿¬°á Á¾·á 
+	   closeDB(); // DB ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 
 	   
 	   return datas;
 	   
-	} // sortIncome(), DB¿¡¼­ Á¶°Ç¿¡ ¸Â´Â µ¥ÀÌÅÍ¸¦ °¡Á®¿È
+	} // sortIncome(), DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¿ï¿½ ï¿½Â´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
    
-	// ±âÁØº° È¿À²¼º ¿µÈ­ top 5
+	// ï¿½ï¿½ï¿½Øºï¿½ È¿ï¿½ï¿½ï¿½ ï¿½ï¿½È­ top 5
 	public ArrayList<Movie> sortEffeciency(String _year, String _month, String _nation, String _rating) {
 		
-	    connectDB(); // DB ¿¬°á
+	    connectDB(); // DB ï¿½ï¿½ï¿½ï¿½
 	    
-	    sql = "select *, income/num_screen as 'effeciency' from movie";  // ±âº» sql¹® 
-	    sql += searchReq(_year, _month, _nation, _rating); // °Ë»ö Á¶°Ç¿¡ ¸Â´Â sql¹® ÀÛ¼º 
-	    sql += " order by income/num_screen desc limit 15"; // Ãß°¡ °Ë»öÁ¶°Ç »ðÀÔ
+	    sql = "select *, income/num_screen as 'effeciency' from movie";  // ï¿½âº» sqlï¿½ï¿½ 
+	    sql += searchReq(_year, _month, _nation, _rating); // ï¿½Ë»ï¿½ ï¿½ï¿½Ç¿ï¿½ ï¿½Â´ï¿½ sqlï¿½ï¿½ ï¿½Û¼ï¿½ 
+	    sql += " order by income/num_screen desc limit 15"; // ï¿½ß°ï¿½ ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	    
-	    // °Ë»öÇÑ µ¥ÀÌÅÍ¸¦ ¹Þ´Â ArrayList
+	    // ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Þ´ï¿½ ArrayList
 	    ArrayList<Movie> datas = new ArrayList<Movie>();
 	      
 	    try{
-	    	// ÇÊ¿ä½Ã pstmt ±×³É tmt·Î ¹Ù²Ù±â 
-	        pstmt = conn.prepareStatement(sql); // sql¹® »ý¼º
-	        rs = pstmt.executeQuery(); // ÀÔ·Â¹ÞÀº sql¹® Àü¼Û, °á°ú µ¥ÀÌÅÍ¸¦ ¹ÞÀ½ 
+	    	// ï¿½Ê¿ï¿½ï¿½ pstmt ï¿½×³ï¿½ tmtï¿½ï¿½ ï¿½Ù²Ù±ï¿½ 
+	        pstmt = conn.prepareStatement(sql); // sqlï¿½ï¿½ ï¿½ï¿½
+	        rs = pstmt.executeQuery(); // ï¿½Ô·Â¹ï¿½ï¿½ sqlï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ 
 	        
 	        while(rs.next()) {
 	        	
 	            Movie m = new Movie();
 
-	            m.setMvcode(rs.getInt("mvcode")); // ¿µÈ­ ¹øÈ£ 
-	            m.setMvname(rs.getString("mvname")); // ¿µÈ­ Á¦¸ñ 
-	            m.setDrname(rs.getString("drname")); // °¨µ¶ ÀÌ¸§ 
-	            m.setOpendate(rs.getDate("open_date")); // °³ºÀÀÏ
-	            m.setCountry(rs.getString("country")); // ±¹Àû
-	            m.setNumScreen(rs.getInt("num_screen")); // ½ºÅ©¸° ¼ö
-	            m.setIncome(rs.getLong("income")); // ¸ÅÃâ¾×
-	            m.setNumPeople(rs.getInt("num_people")); // °ü°´ ¼ö
-	            m.setGenre(rs.getString("genre")); // Àå¸£
-	            m.setRating(rs.getString("rating")); // °ü¶÷ µî±Þ 
-	            m.setFResult(rs.getFloat("effeciency")); // È¿À²¼º 
-	            datas.add(m); // µ¥ÀÌÅÍ¸¦ arrayList¿¡ ÀúÀå
+	            m.setMvcode(rs.getInt("mvcode")); // ï¿½ï¿½È­ ï¿½ï¿½È£ 
+	            m.setMvname(rs.getString("mvname")); // ï¿½ï¿½È­ ï¿½ï¿½ï¿½ 
+	            m.setDrname(rs.getString("drname")); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ 
+	            m.setOpendate(rs.getDate("open_date")); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	            m.setCountry(rs.getString("country")); // ï¿½ï¿½ï¿½ï¿½
+	            m.setNumScreen(rs.getInt("num_screen")); // ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½
+	            m.setIncome(rs.getLong("income")); // ï¿½ï¿½ï¿½ï¿½ï¿½
+	            m.setNumPeople(rs.getInt("num_people")); // ï¿½ï¿½ ï¿½ï¿½
+	            m.setGenre(rs.getString("genre")); // ï¿½å¸£
+	            m.setRating(rs.getString("rating")); // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 
+	            m.setFResult(rs.getFloat("effeciency")); // È¿ï¿½ï¿½ï¿½ 
+	            datas.add(m); // ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ arrayListï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	         
-	        } // while, °¡Á®¿Â µ¥ÀÌÅÍ ÀúÀå 
+	        } // while, ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 
 	        rs.close(); // close 
 	   } catch(Exception e5) {
 	        e5.printStackTrace();
 	   }
 	      
-	   closeDB(); // DB ¿¬°á Á¾·á 
+	   closeDB(); // DB ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 
 	   
 	   return datas;
-	} // sortEffeciency(), DB¿¡¼­ Á¶°Ç¿¡ ¸Â´Â µ¥ÀÌÅÍ¸¦ °¡Á®¿È
+	} // sortEffeciency(), DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¿ï¿½ ï¿½Â´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 	
-	// ±âÁØº° °¨µ¶ ±âÁØ top 5
-	// ÄÞº¸¹Ú½º 3°³ Á¶°Ç •ûµµ µÉ °Í °°À½ 
-	// ½ºÅ©¸° ¼ö ´ë½Å ¿µÈ­ °¹¼ö, ¸ÅÃâ¾× ´ë½Å ´©Àû ¸ÅÃâ¾× setÇÔ 
+	// ï¿½ï¿½ï¿½Øºï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ top 5
+	// ï¿½Þºï¿½ï¿½Ú½ï¿½ 3ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ 
+	// ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ setï¿½ï¿½ 
 	public ArrayList<Movie> sortDirector(String _drname) {
 		
-	    connectDB(); // DB ¿¬°á
+	    connectDB(); // DB ï¿½ï¿½ï¿½ï¿½
 	    
-	    sql = "select * from movie";  // ±âº»
-	    sql += " where drname like " + "'%"+ _drname + "%'"; // °¨µ¶ÀÌ¸§ ÁöÁ¤
-	    sql += " order by drname"; // Ãß°¡ °Ë»öÁ¶°Ç »ðÀÔ 
+	    sql = "select * from movie";  // ï¿½âº»
+	    sql += " where drname like " + "'%"+ _drname + "%'"; // ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½
+	    sql += " order by drname"; // ï¿½ß°ï¿½ ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 	    
-	    // °Ë»öÇÑ µ¥ÀÌÅÍ¸¦ ¹Þ´Â ArrayList
+	    // ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Þ´ï¿½ ArrayList
 	    ArrayList<Movie> datas = new ArrayList<Movie>();
 	      
 	    try{
-	    	// ÇÊ¿ä½Ã pstmt ±×³É tmt·Î ¹Ù²Ù±â 
-	        pstmt = conn.prepareStatement(sql); // sql¹® »ý¼º
-	        rs = pstmt.executeQuery(); // ÀÔ·Â¹ÞÀº sql¹® Àü¼Û, °á°ú µ¥ÀÌÅÍ¸¦ ¹ÞÀ½ 
+	    	// ï¿½Ê¿ï¿½ï¿½ pstmt ï¿½×³ï¿½ tmtï¿½ï¿½ ï¿½Ù²Ù±ï¿½ 
+	        pstmt = conn.prepareStatement(sql); // sqlï¿½ï¿½ ï¿½ï¿½
+	        rs = pstmt.executeQuery(); // ï¿½Ô·Â¹ï¿½ï¿½ sqlï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ 
 	        
 	        while(rs.next()) {
 
         		Movie m = new Movie();
 
-	            //m.setMvcode(rs.getInt("mvcode")); // ¿µÈ­ ¹øÈ£ 
-	            m.setMvname(rs.getString("mvname")); // ¿µÈ­ Á¦¸ñ 
-	            m.setDrname(rs.getString("drname")); // °¨µ¶ ÀÌ¸§ 
-	            //m.setOpendate(rs.getDate("open_date")); // °³ºÀÀÏ
-	            //m.setCountry(rs.getString("country")); // ±¹Àû
-	            m.setNumScreen(rs.getInt("num_screen")); // ½ºÅ©¸° ¼ö 
-	            m.setIncome(rs.getLong("income")); // ¸ÅÃâ¾× 
-	            //m.setNumPeople(rs.getInt("num_people")); // °ü°´ ¼ö
-	            //m.setGenre(rs.getString("genre")); // Àå¸£
-	            //m.setRating(rs.getString("rating")); // °ü¶÷ µî±Þ 
-	            datas.add(m); // µ¥ÀÌÅÍ¸¦ arrayList¿¡ ÀúÀå
+	            //m.setMvcode(rs.getInt("mvcode")); // ï¿½ï¿½È­ ï¿½ï¿½È£ 
+	            m.setMvname(rs.getString("mvname")); // ï¿½ï¿½È­ ï¿½ï¿½ï¿½ 
+	            m.setDrname(rs.getString("drname")); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ 
+	            //m.setOpendate(rs.getDate("open_date")); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	            //m.setCountry(rs.getString("country")); // ï¿½ï¿½ï¿½ï¿½
+	            m.setNumScreen(rs.getInt("num_screen")); // ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½ 
+	            m.setIncome(rs.getLong("income")); // ï¿½ï¿½ï¿½ï¿½ï¿½ 
+	            //m.setNumPeople(rs.getInt("num_people")); // ï¿½ï¿½ ï¿½ï¿½
+	            //m.setGenre(rs.getString("genre")); // ï¿½å¸£
+	            //m.setRating(rs.getString("rating")); // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 
+	            datas.add(m); // ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ arrayListï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	         
-	        } // while, °¡Á®¿Â µ¥ÀÌÅÍ ÀúÀå 
+	        } // while, ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 
 	        rs.close(); // close
 	        
@@ -235,44 +235,44 @@ public class MovieDAO {
 	        e6.printStackTrace();
 	   }
 	      
-	   closeDB(); // DB ¿¬°á Á¾·á 
+	   closeDB(); // DB ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 
 	   
 	   return datas;
-	} // sortDirector(), DB¿¡¼­ Á¶°Ç¿¡ ¸Â´Â µ¥ÀÌÅÍ¸¦ °¡Á®¿È
+	} // sortDirector(), DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¿ï¿½ ï¿½Â´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 	
-	// ±âÁØº° ÈïÇàÀÛ top 5 < ´©Àû °ü°´ ¼ö 100¸¸ ÀÌ»ó)
-	// ÄÞº¸¹Ú½º 3°³ Á¶°Ç ÀÏ´Ü »­ 
+	// ï¿½ï¿½ï¿½Øºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ top 5 < ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ 100ï¿½ï¿½ ï¿½Ì»ï¿½)
+	// ï¿½Þºï¿½ï¿½Ú½ï¿½ 3ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ 
 
 	public ArrayList<Movie> sortSuccess() {
 
-	    connectDB(); // DB ¿¬°á
-	    sql = "select * from movie where num_people > 1000000 order by num_people desc;";  // ±âº» 
+	    connectDB(); // DB ï¿½ï¿½ï¿½ï¿½
+	    sql = "select * from movie where num_people > 1000000 order by num_people desc;";  // ï¿½âº» 
 
-	    // °Ë»öÇÑ µ¥ÀÌÅÍ¸¦ ¹Þ´Â ArrayList
+	    // ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Þ´ï¿½ ArrayList
 	    ArrayList<Movie> datas = new ArrayList<Movie>();
 
 	    try{
-	    	// ÇÊ¿ä½Ã pstmt ±×³É tmt·Î ¹Ù²Ù±â 
+	    	// ï¿½Ê¿ï¿½ï¿½ pstmt ï¿½×³ï¿½ tmtï¿½ï¿½ ï¿½Ù²Ù±ï¿½ 
 
-	        pstmt = conn.prepareStatement(sql); // sql¹® »ý¼º
-	        rs = pstmt.executeQuery(); // ÀÔ·Â¹ÞÀº sql¹® Àü¼Û, °á°ú µ¥ÀÌÅÍ¸¦ ¹ÞÀ½ 
+	        pstmt = conn.prepareStatement(sql); // sqlï¿½ï¿½ ï¿½ï¿½
+	        rs = pstmt.executeQuery(); // ï¿½Ô·Â¹ï¿½ï¿½ sqlï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ 
 	        
 	        while(rs.next()) {
 	        	
 	        	Movie m = new Movie();
-	        	m.setMvcode(rs.getInt("mvcode")); // ¿µÈ­ ¹øÈ£ 
-	            m.setMvname(rs.getString("mvname")); // ¿µÈ­ Á¦¸ñ 
-	            m.setDrname(rs.getString("drname")); // °¨µ¶ ÀÌ¸§ 
-	            m.setOpendate(rs.getDate("open_date")); // °³ºÀÀÏ
-	            m.setCountry(rs.getString("country")); // ±¹Àû
-	            m.setNumScreen(rs.getInt("num_screen")); // ½ºÅ©¸° ¼ö ´ë½Å 
-	            m.setIncome(rs.getLong("income")); // ¸ÅÃâ¾× ´ë½Å ´©Àû ¸ÅÃâ¾× 
-	            m.setNumPeople(rs.getInt("num_people")); // °ü°´ ¼ö
-	            m.setGenre(rs.getString("genre")); // Àå¸£
-	            m.setRating(rs.getString("rating")); // °ü¶÷ µî±Þ 
-	            datas.add(m); // µ¥ÀÌÅÍ¸¦ arrayList¿¡ ÀúÀå
+	        	m.setMvcode(rs.getInt("mvcode")); // ï¿½ï¿½È­ ï¿½ï¿½È£ 
+	            m.setMvname(rs.getString("mvname")); // ï¿½ï¿½È­ ï¿½ï¿½ï¿½ 
+	            m.setDrname(rs.getString("drname")); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ 
+	            m.setOpendate(rs.getDate("open_date")); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	            m.setCountry(rs.getString("country")); // ï¿½ï¿½ï¿½ï¿½
+	            m.setNumScreen(rs.getInt("num_screen")); // ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ 
+	            m.setIncome(rs.getLong("income")); // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ 
+	            m.setNumPeople(rs.getInt("num_people")); // ï¿½ï¿½ ï¿½ï¿½
+	            m.setGenre(rs.getString("genre")); // ï¿½å¸£
+	            m.setRating(rs.getString("rating")); // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 
+	            datas.add(m); // ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ arrayListï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	            
-	        } // while, °¡Á®¿Â µ¥ÀÌÅÍ ÀúÀå 
+	        } // while, ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 	        
 	        rs.close(); // close 
 
@@ -280,45 +280,45 @@ public class MovieDAO {
 	        e7.printStackTrace();
 	   }
 
-	   closeDB(); // DB ¿¬°á Á¾·á 
+	   closeDB(); // DB ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 
 
 	   return datas;
 
-	} // sortSuccess(), DB¿¡¼­ Á¶°Ç¿¡ ¸Â´Â µ¥ÀÌÅÍ¸¦ °¡Á®¿È
+	} // sortSuccess(), DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¿ï¿½ ï¿½Â´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 	
-   // ½ºÅ©¸° ¼ö ´ë½Å ¿µÈ­ °¹¼ö Ãß°¡
+   // ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
    public ArrayList<Movie> sortTheme() {
 	   
-       connectDB(); // DB ¿¬°á
+       connectDB(); // DB ï¿½ï¿½ï¿½ï¿½
        
-       sql = "select genre, avg(income) as 'avg_income', count(*) as 'num_movie' from movie group by genre order by count(*) desc";  // ±âº» 
+       sql = "select genre, avg(income) as 'avg_income', count(*) as 'num_movie' from movie group by genre order by count(*) desc";  // ï¿½âº» 
        
-       // °Ë»öÇÑ µ¥ÀÌÅÍ¸¦ ¹Þ´Â ArrayList
+       // ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Þ´ï¿½ ArrayList
        ArrayList<Movie> datas = new ArrayList<Movie>();
        
        try{
-          // ÇÊ¿ä½Ã pstmt ±×³É tmt·Î ¹Ù²Ù±â 
-           pstmt = conn.prepareStatement(sql); // sql¹® »ý¼º
-           rs = pstmt.executeQuery(); // ÀÔ·Â¹ÞÀº sql¹® Àü¼Û, °á°ú µ¥ÀÌÅÍ¸¦ ¹ÞÀ½ 
+          // ï¿½Ê¿ï¿½ï¿½ pstmt ï¿½×³ï¿½ tmtï¿½ï¿½ ï¿½Ù²Ù±ï¿½ 
+           pstmt = conn.prepareStatement(sql); // sqlï¿½ï¿½ ï¿½ï¿½
+           rs = pstmt.executeQuery(); // ï¿½Ô·Â¹ï¿½ï¿½ sqlï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ 
            
            while(rs.next()) {
               
                Movie m = new Movie();
 
-               //m.setMvcode(rs.getInt("mvcode")); // ¿µÈ­ ¹øÈ£ 
-               //m.setMvname(rs.getString("mvname")); // ¿µÈ­ Á¦¸ñ 
-               //m.setDrname(rs.getString("drname")); // °¨µ¶ ÀÌ¸§ 
-               //m.setOpendate(rs.getDate("open_date")); // °³ºÀÀÏ
-               //m.setCountry(rs.getString("country")); // ±¹Àû
-               m.setNumScreen(rs.getInt("num_movie")); // ½ºÅ©¸° ¼ö ´ë½Å ¿µÈ­ °³¼ö 
-               //m.setIncome(rs.getLong("income")); // ¸ÅÃâ¾×
-               //m.setNumPeople(rs.getInt("num_people")); // °ü°´ ¼ö
-               m.setGenre(rs.getString("genre")); // Àå¸£
-               //m.setRating(rs.getString("rating")); // °ü¶÷ µî±Þ 
-               m.setFResult(rs.getFloat("avg_income")); // Æò±Õ ¸ÅÃâ¾×    
-               datas.add(m); // µ¥ÀÌÅÍ¸¦ arrayList¿¡ ÀúÀå
+               //m.setMvcode(rs.getInt("mvcode")); // ï¿½ï¿½È­ ï¿½ï¿½È£ 
+               //m.setMvname(rs.getString("mvname")); // ï¿½ï¿½È­ ï¿½ï¿½ï¿½ 
+               //m.setDrname(rs.getString("drname")); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ 
+               //m.setOpendate(rs.getDate("open_date")); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+               //m.setCountry(rs.getString("country")); // ï¿½ï¿½ï¿½ï¿½
+               m.setNumScreen(rs.getInt("num_movie")); // ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ 
+               //m.setIncome(rs.getLong("income")); // ï¿½ï¿½ï¿½ï¿½ï¿½
+               //m.setNumPeople(rs.getInt("num_people")); // ï¿½ï¿½ ï¿½ï¿½
+               m.setGenre(rs.getString("genre")); // ï¿½å¸£
+               //m.setRating(rs.getString("rating")); // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 
+               m.setFResult(rs.getFloat("avg_income")); // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½    
+               datas.add(m); // ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ arrayListï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             
-           } // while, °¡Á®¿Â µ¥ÀÌÅÍ ÀúÀå 
+           } // while, ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 
            rs.close(); // close
            
@@ -326,44 +326,44 @@ public class MovieDAO {
            e8.printStackTrace();
       }
          
-      closeDB(); // DB ¿¬°á Á¾·á 
+      closeDB(); // DB ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 
       
       return datas;
-   } // sortTheme(), DB¿¡¼­ Á¶°Ç¿¡ ¸Â´Â µ¥ÀÌÅÍ¸¦ °¡Á®¿È
+   } // sortTheme(), DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¿ï¿½ ï¿½Â´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
    
    public ArrayList<Movie> sortWord(String word) {
 		
-	    connectDB(); // DB ¿¬°á
+	    connectDB(); // DB ï¿½ï¿½ï¿½ï¿½
 	    
-	    sql = "select * from movie";  // ±âº»
-	    sql += " where mvname like " + "'%"+ word + "%'"; // ´Ü¾î Æ÷ÇÔ¿©ºÎ ¼³Á¤
-	    sql += " order by mvname"; // Ãß°¡ °Ë»öÁ¶°Ç »ðÀÔ  
+	    sql = "select * from movie";  // ï¿½âº»
+	    sql += " where mvname like " + "'%"+ word + "%'"; // ï¿½Ü¾ï¿½ ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	    sql += " order by mvname"; // ï¿½ß°ï¿½ ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½  
 	    
-	    // °Ë»öÇÑ µ¥ÀÌÅÍ¸¦ ¹Þ´Â ArrayList
+	    // ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Þ´ï¿½ ArrayList
 	    ArrayList<Movie> datas = new ArrayList<Movie>();
 	      
 	    try{
-	    	// ÇÊ¿ä½Ã pstmt ±×³É tmt·Î ¹Ù²Ù±â 
-	        pstmt = conn.prepareStatement(sql); // sql¹® »ý¼º
-	        rs = pstmt.executeQuery(); // ÀÔ·Â¹ÞÀº sql¹® Àü¼Û, °á°ú µ¥ÀÌÅÍ¸¦ ¹ÞÀ½ 
+	    	// ï¿½Ê¿ï¿½ï¿½ pstmt ï¿½×³ï¿½ tmtï¿½ï¿½ ï¿½Ù²Ù±ï¿½ 
+	        pstmt = conn.prepareStatement(sql); // sqlï¿½ï¿½ ï¿½ï¿½
+	        rs = pstmt.executeQuery(); // ï¿½Ô·Â¹ï¿½ï¿½ sqlï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ 
 	        
 	        while(rs.next()) {
 
        		Movie m = new Movie();
 
-	            //m.setMvcode(rs.getInt("mvcode")); // ¿µÈ­ ¹øÈ£ 
-	            m.setMvname(rs.getString("mvname")); // ¿µÈ­ Á¦¸ñ 
-	            //m.setDrname(rs.getString("drname")); // °¨µ¶ ÀÌ¸§ 
-	            m.setOpendate(rs.getDate("open_date")); // °³ºÀÀÏ
-	            //m.setCountry(rs.getString("country")); // ±¹Àû
-	            //m.setNumScreen(rs.getInt("num_screen")); // ½ºÅ©¸° ¼ö 
-	            //m.setIncome(rs.getLong("income")); // ¸ÅÃâ¾× 
-	            //m.setNumPeople(rs.getInt("num_people")); // °ü°´ ¼ö
-	            m.setGenre(rs.getString("genre")); // Àå¸£
-	            m.setRating(rs.getString("rating")); // °ü¶÷ µî±Þ 
-	            datas.add(m); // µ¥ÀÌÅÍ¸¦ arrayList¿¡ ÀúÀå
+	            //m.setMvcode(rs.getInt("mvcode")); // ï¿½ï¿½È­ ï¿½ï¿½È£ 
+	            m.setMvname(rs.getString("mvname")); // ï¿½ï¿½È­ ï¿½ï¿½ï¿½ 
+	            //m.setDrname(rs.getString("drname")); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ 
+	            m.setOpendate(rs.getDate("open_date")); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	            //m.setCountry(rs.getString("country")); // ï¿½ï¿½ï¿½ï¿½
+	            //m.setNumScreen(rs.getInt("num_screen")); // ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½ 
+	            //m.setIncome(rs.getLong("income")); // ï¿½ï¿½ï¿½ï¿½ï¿½ 
+	            //m.setNumPeople(rs.getInt("num_people")); // ï¿½ï¿½ ï¿½ï¿½
+	            m.setGenre(rs.getString("genre")); // ï¿½å¸£
+	            m.setRating(rs.getString("rating")); // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 
+	            datas.add(m); // ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ arrayListï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	         
-	        } // while, °¡Á®¿Â µ¥ÀÌÅÍ ÀúÀå 
+	        } // while, ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 
 	        rs.close(); // close
 	        
@@ -371,37 +371,37 @@ public class MovieDAO {
 	        e9.printStackTrace();
 	   }
 	      
-	   closeDB(); // DB ¿¬°á Á¾·á
+	   closeDB(); // DB ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	   
 	   return datas;
 	   
-	} // sortWord(), DB¿¡¼­ Á¶°Ç¿¡ ¸Â´Â µ¥ÀÌÅÍ¸¦ °¡Á®¿È
+	} // sortWord(), DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¿ï¿½ ï¿½Â´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 	   
 	
-	// °Ë»ö Á¶°Ç¿¡ ¸Â´Â sql¹®À» ÀÛ¼ºÇÏ´Â ¸Þ¼Òµå 
+	// ï¿½Ë»ï¿½ ï¿½ï¿½Ç¿ï¿½ ï¿½Â´ï¿½ sqlï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼Òµï¿½ 
 	private String searchReq(String _year, String _month, String _nation, String _rating) {
 		
 		String sql = "";
 		
-	    // ³âµµº° ¹× ¿ùº° °Ë»ö Á¶°Ç Ã¼Å©, ¿ùº° ÀüÃ¼ °Ë»öÀ» ÇÏÁö ¾ÊÀº °æ¿ì  
-	    if (!(_month.equals("ÀüÃ¼"))) {
-	    	// ¼±ÅÃ ¿ùÀÌ ÀüÃ¼°¡ ¾Æ´Ï¸é ¿ùº° ¹× ¿¬µµº° ±â°£ °Ë»ö¹® Ãß°¡ 
+	    // ï¿½âµµï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ Ã¼Å©, ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½Ë»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½  
+	    if (!(_month.equals("ï¿½ï¿½Ã¼"))) {
+	    	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½â°£ ï¿½Ë»ï¿½ ï¿½ß°ï¿½ 
 	    	
-	    	if ((_year.equals("ÀüÃ¼"))) { // ³âµµ´Â ÀüÃ¼°í, Æ¯Á¤ ¿ùÀ» ÁöÁ¤ÇÑ °æ¿ì(16³âµµ È¤Àº 17³âµµ µÑÁß¿¡ ÇÏ³ª¸¸ °¡´ÉÇØµµ Ãâ·ÂÀÌ¹Ç·Î or »ç¿ë)
+	    	if ((_year.equals("ï¿½ï¿½Ã¼"))) { // ï¿½âµµï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½, Æ¯ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½(16ï¿½âµµ È¤ï¿½ 17ï¿½âµµ ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ ï¿½ï¿½ï¿½ï¿½Ì¹Ç·ï¿½ or ï¿½ï¿½ï¿½)
 	    		
-	    		sql+= " where (DATE(open_date) between '2016-" +_month +"-01' and last_day('2016-"+_month +"-01')" // 16³âµµ¿¡¼­ ÇØ´ç ¿ùÀÇ ¿µÈ­ ¼±ÅÃ
-	    		+ " or DATE(open_date) between '2017-" +_month +"-01' and last_day('2017-"+_month +"-01'))"; // 17³âµµ¿¡¼­ ÇØ´ç ¿ùÀÇ ¿µÈ­ ¼±ÅÃ
+	    		sql+= " where (DATE(open_date) between '2016-" +_month +"-01' and last_day('2016-"+_month +"-01')" // 16ï¿½âµµï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½
+	    		+ " or DATE(open_date) between '2017-" +_month +"-01' and last_day('2017-"+_month +"-01'))"; // 17ï¿½âµµï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½
 	    		
 	    	} // if
 	    	
-	    	else if ((_year.equals("2017"))) { // 17³âµµ ¼±ÅÃ ÈÄ Æ¯Á¤ ¿ù ¼±ÅÃÇÑ °æ¿ì
+	    	else if ((_year.equals("2017"))) { // 17ï¿½âµµ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Æ¯ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	    	
 	    		sql+= " where DATE(open_date) between '2017-" +_month 
 	               +"-01' and last_day('2017-"+_month +"-01')";
 	        
 	    	} // else if
 	    	
-	    	else if ((_year.equals("2016"))) { // 16³âµµ ¼±ÅÃ ÈÄ Æ¯Á¤ ¿ù ¼±ÅÃÇÑ °æ¿ì
+	    	else if ((_year.equals("2016"))) { // 16ï¿½âµµ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Æ¯ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		    	
 	    		sql+= " where DATE(open_date) between '2016-" +_month 
 	               +"-01' and last_day('2016-"+_month +"-01')";
@@ -411,72 +411,72 @@ public class MovieDAO {
 	    }
 	    
 	    
-	    else { // ÀüÃ¼ ¿ùÀ» ¼±ÅÃÇÑ °æ¿ì
+	    else { // ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	    	
-	    	if ((_year.equals("2017"))) { // ³¯Â¥¸¦ 17³â 1¿ùºÎÅÍ 12¿ù±îÁö·Î ¼³Á¤
+	    	if ((_year.equals("2017"))) { // ï¿½ï¿½Â¥ï¿½ï¿½ 17ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ï¿½ 12ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		    	
 	    		sql+= " where DATE(open_date) between '2017-1-01'"
 	    				+ "and last_day('2017-"+ "12" +"-01')";
 	        
 	    	} // if
 	    	
-	    	else if ((_year.equals("2016"))) { // ³¯Â¥¸¦ 16³â 1¿ùºÎÅÍ 12¿ù±îÁö·Î ¼³Á¤
+	    	else if ((_year.equals("2016"))) { // ï¿½ï¿½Â¥ï¿½ï¿½ 16ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ï¿½ 12ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		    	
 	    		sql+= " where DATE(open_date) between '2016-1-01'"
 	    				+ "and last_day('2016-12-01')";
 	        
 	    	} // else if
 	    	
-	    	else if ((_year.equals("ÀüÃ¼"))) { // ³âµµ, ¿ù ¸ðµÎ ÀüÃ¼ÀÎ °æ¿ì ¾Æ¹« Á¶°Çµµ Ãß°¡ÇÏÁö ¾ÊÀ½
+	    	else if ((_year.equals("ï¿½ï¿½Ã¼"))) { // ï¿½âµµ, ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Æ¹ï¿½ ï¿½ï¿½Çµï¿½ ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	    	
 	    	} // else if
 	    	
 	    } // else
 	    
 	    
-	    // ±¹°¡ °Ë»ö Á¶°Ç Ã¼Å©, ÇÑ±¹ÀÎ °æ¿ì 
-	    if ((_nation.equals("ÇÑ±¹"))) {
-	    	// ¿ùº° °Ë»ö Á¶°ÇÀÌ ÀüÃ¼ÀÎ °æ¿ì
+	    // ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ Ã¼Å©, ï¿½Ñ±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 
+	    if ((_nation.equals("ï¿½Ñ±ï¿½"))) {
+	    	// ï¿½ï¿½ ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½
 	    	
-	    	if (_month.equals("ÀüÃ¼") && _year.equals("ÀüÃ¼")) { // ¿¬µµ¿Í ¿ùÀÌ ¸ðµÎ ÀüÃ¼¿´À¸¸é Ã³À½À¸·Î »ç¿ëµÇ´Â Á¶°Ç¹®ÀÏ °ÍÀÌ¹Ç·Î where »ç¿ë
-	    		sql += " where country = 'ÇÑ±¹'";            
+	    	if (_month.equals("ï¿½ï¿½Ã¼") && _year.equals("ï¿½ï¿½Ã¼")) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¹Ç·ï¿½ where ï¿½ï¿½ï¿½
+	    		sql += " where country = 'ï¿½Ñ±ï¿½'";            
 	    	}
-	         // ¿¬µµº° ¹× ¿ùº° °Ë»ö Á¶°ÇÀÌ ÀüÃ¼°¡ ¾Æ´Ñ °æ¿ì
-	         else { // À§¿¡¼­ where¸¦ »ç¿ëÇßÀ¸¹Ç·Î and·Î Á¶°Ç Ãß°¡
-	            sql += " and country = 'ÇÑ±¹'";   
+	         // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ï¿½
+	         else { // ï¿½ï¿½ï¿½ï¿½ï¿½ whereï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ andï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
+	            sql += " and country = 'ï¿½Ñ±ï¿½'";   
 	         }         
 	    } 
 	    
-	    // ±¹°¡ °Ë»ö Á¶°ÇÀÌ ¿Ü±¹ÀÎ °æ¿ì 
-	    else if ((_nation.equals("¿Ü±¹"))) {
-	    	// ¿ùº° °Ë»ö Á¶°ÇÀÌ ÀüÃ¼ÀÎ °æ¿ì
+	    // ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ü±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 
+	    else if ((_nation.equals("ï¿½Ü±ï¿½"))) {
+	    	// ï¿½ï¿½ ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½
 	    	
-	    	if (_month.equals("ÀüÃ¼") && _year.equals("ÀüÃ¼")) {
-	    		sql += " where country != 'ÇÑ±¹'";
+	    	if (_month.equals("ï¿½ï¿½Ã¼") && _year.equals("ï¿½ï¿½Ã¼")) {
+	    		sql += " where country != 'ï¿½Ñ±ï¿½'";
 	        }	
-	    	// ¿ùº° °Ë»ö Á¶°ÇÀÌ ÀüÃ¼°¡ ¾Æ´Ñ °æ¿ì
+	    	// ï¿½ï¿½ ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ï¿½
 	    	else {
-	    		sql += " and country != 'ÇÑ±¹'";
+	    		sql += " and country != 'ï¿½Ñ±ï¿½'";
 	    	}
 	    	
 	    } // else if
 	      
 	    
-	    // °ü¶÷µî±Þ °Ë»ö Á¶°Ç Ã¼Å©, °ü¶÷µî±Þ °Ë»öÀ» ÀüÃ¼·Î ÇÏÁö ¾ÊÀº °æ¿ì
-	    if (!(_rating.equals("ÀüÃ¼"))) {
+	    // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ Ã¼Å©, ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	    if (!(_rating.equals("ï¿½ï¿½Ã¼"))) {
 	    	
-	    	if ((_month.equals("ÀüÃ¼")) && (_nation.equals("ÀüÃ¼")) && (_year.equals("ÀüÃ¼"))) {
-	    		// À§ Á¶°ÇÀÌ ¸ðµÎ ÀüÃ¼ÀÎ °æ¿ì Ã³À½À¸·Î »ç¿ëµÇ´Â Á¶°ÇÀÌ¹Ç·Î where »ç¿ë
+	    	if ((_month.equals("ï¿½ï¿½Ã¼")) && (_nation.equals("ï¿½ï¿½Ã¼")) && (_year.equals("ï¿½ï¿½Ã¼"))) {
+	    		// ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½Ì¹Ç·ï¿½ where ï¿½ï¿½ï¿½
 	            sql += " where rating like " + "'"+ _rating + "%'"; 
 	    	}
-	    	// ÇÏ³ª¶óµµ Æ¯Á¤ Á¶°ÇÀÌ ¼³Á¤µÈ °æ¿ì
-	    	else { // Ãß°¡ Á¶°ÇÀ¸·Î »ç¿ëÇÏ¸é µÇ¹Ç·Î and »ç¿ë
+	    	// ï¿½Ï³ï¿½ï¿½ï¿½ Æ¯ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	    	else { // ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Ç¹Ç·ï¿½ and ï¿½ï¿½ï¿½
 	    		sql += " and rating like " + "'"+ _rating + "%'";
 	    	}   
 	    }
-	    // Á¶°ÇÀÌ ÀüÃ¼ÀÎ °æ¿ì ÇÒ ÇÊ¿ä x 
+	    // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ê¿ï¿½ x 
 	      
-	    return sql; // ÀÛ¼ºÇÑ sql¹® ¹ÝÈ¯
+	    return sql; // ï¿½Û¼ï¿½ï¿½ï¿½ sqlï¿½ï¿½ ï¿½ï¿½È¯
 	      
 	} // searchReq()
 }
