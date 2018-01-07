@@ -91,6 +91,7 @@ public class Movie {
 		return strResult;
 	}
 	
+	
 	public void setMvcode(int _mvcode) {
 		mvcode = _mvcode;
 	}

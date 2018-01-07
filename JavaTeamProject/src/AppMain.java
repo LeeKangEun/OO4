@@ -14,7 +14,7 @@ public class AppMain {
 	private AppMain() {
 		
 	}
-	
+
 	public static AppMain getInstance() { // AppMain 클래스를 사용하기 위함
 		
 		if(s_instance == null) {
