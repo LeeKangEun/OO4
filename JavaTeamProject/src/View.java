@@ -4,94 +4,99 @@ import java.text.*;
 import java.util.*;
 import javax.swing.*;
 
+
+/*
+ * 18.01.07 ÃÖÁ¾º» 
+ */
+
 public class View extends JFrame{
 	
-	ArrayList<Movie> datas; // DBï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
-	MovieDAO md; // MovieDAO ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
+	ArrayList<Movie> datas; // DB¿¡¼­ ¹Þ¾Æ¿Â ¿µÈ­ Á¤º¸¸¦ ÀúÀå ÇÒ º¯¼ö 
+	MovieDAO md; // MovieDAO °´Ã¼ ¼±¾ð
 	
-	public View() { // ï¿½ï¿½ï¿½ï¿½
+	public View() { // »ý¼ºÀÚ
 		
-		AppMain.getInstance().setView(this); // view ï¿½ï¿½Ã¼ï¿½ï¿½ AppMainï¿½ï¿½ set 
+		AppMain.getInstance().setView(this); // view °´Ã¼¸¦ AppMain¿¡ set 
 		
-		AppMain app = AppMain.getInstance(); // ï¿½Ì±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
-		MovieDAO md = new MovieDAO(); // MovieDAO ï¿½ï¿½Ã¼ ï¿½ï¿½
-		datas = new ArrayList<Movie>(); // MovieÅ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ArrayList ï¿½ï¿½Ã¼ ï¿½ï¿½
+		AppMain app = AppMain.getInstance(); // ½Ì±ÛÅæ ÆÐÅÏ Àû¿ë
+		MovieDAO md = new MovieDAO(); // MovieDAO °´Ã¼ »ý¼º
+		datas = new ArrayList<Movie>(); // MovieÅ¬·¡½ºÀÇ ArrayList °´Ã¼ »ý¼º
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("ï¿½ï¿½È­ ï¿½Ð¼ï¿½ ï¿½ï¿½Î±×·ï¿½");
+		setTitle("¿µÈ­ ºÐ¼® ÇÁ·Î±×·¥");
 		
-		this.setLayout(new FlowLayout()); // ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½Ì¾Æ¿ï¿½ ï¿½ï¿½ï¿½
+		this.setLayout(new FlowLayout()); // ÀüÃ¼ ·¹ÀÌ¾Æ¿ô ¼³Á¤
 		
-		JPanel explain = new JPanel(); // ï¿½Þºï¿½ ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½î¶² ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ ï¿½ï¿½Éµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð³Î·ï¿½ ï¿½ï¿½ï¿½ï¿½)
-		JPanel standard = new JPanel(); // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þºï¿½ ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		JPanel func1 = new JPanel(); // ï¿½ï¿½ï¿½ 1
-		JPanel func2 = new JPanel(); // ï¿½ï¿½ï¿½ 2
-		JPanel showResult = new JPanel(); // ï¿½Ð¼ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ ï¿½ï¿½ï¿½ ï¿½Ð³ï¿½
-		JPanel result = new JPanel(); // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ ï¿½ï¿½ï¿½ ï¿½Ð³ï¿½ 
+		JPanel explain = new JPanel(); // ÄÞº¸ ¹Ú½º¸¦ ÅëÇØ ¾î¶² ±âÁØÀ» ¼±ÅÃÇß´ÂÁö º¸¿©ÁÜ(°¢ ±â´ÉµéÀ» °¢°¢ÀÇ ÆÐ³Î·Î ±¸Çö)
+		JPanel standard = new JPanel(); // ±âÁØÀ» ¼±ÅÃÇÒ ÄÞº¸ ¹Ú½º¸¦ º¸¿©ÁÜ
+		JPanel func1 = new JPanel(); // ±â´É 1
+		JPanel func2 = new JPanel(); // ±â´É 2
+		JPanel showResult = new JPanel(); // ºÐ¼® ÁöÇ¥¸¦ º¸¿©ÁÖ±â À§ÇÑ ÆÐ³Î
+		JPanel result = new JPanel(); // °á°ú¸¦ º¸¿©ÁÖ±â À§ÇÑ ÆÐ³Î 
 		
-		explain.setLayout(new BorderLayout()); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð³Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾Æ¿ï¿½ ï¿½ï¿½ï¿½
+		explain.setLayout(new BorderLayout()); // °¢°¢ÀÇ ÆÐ³ÎµéÀÇ ·¹ÀÌ¾Æ¿ô ¼³Á¤
 		standard.setLayout(new GridLayout(1, 6, 30, 0));
 		func1.setLayout(new GridLayout(1, 3, 100, 0));
 		func2.setLayout(new GridLayout(1, 3, 100, 0));
 		showResult.setLayout(new GridLayout(1, 4));
 		result.setLayout(new GridLayout(1, 4));
 		
-		explain.setPreferredSize(new Dimension(800,70)); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð³Îµï¿½ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½
+		explain.setPreferredSize(new Dimension(800,70)); // °¢°¢ÀÇ ÆÐ³ÎµéÀÇ Å©±â ¼³Á¤
 		standard.setPreferredSize(new Dimension(800,30));
 		func1.setPreferredSize(new Dimension(800,70));
 		func2.setPreferredSize(new Dimension(800,70));
 		showResult.setPreferredSize(new Dimension(800,20));
 		result.setPreferredSize(new Dimension(800,460));
 		
-		this.add(explain); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Îµï¿½ï¿½ È­ï¿½é¿¡ ï¿½ß°ï¿½
+		this.add(explain); // °¢°¢ÀÇ Æä³ÎµéÀ» È­¸é¿¡ Ãß°¡
 		this.add(standard);
 		this.add(func1);
 		this.add(func2);
 		this.add(showResult);
 		this.add(result);
 		
-		JLabel title = new JLabel("ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¼ï¿½"); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î±×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		title.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ExtraBold", 0, 37)); // ï¿½ï¿½Æ® ï¿½ï¿½ï¿½
-		title.setHorizontalAlignment(JLabel.CENTER); // ï¿½ß¾ï¿½ ï¿½ï¿½ï¿½
+		JLabel title = new JLabel("¿µÈ­ µ¥ÀÌÅÍ ºÐ¼®"); // °¡Àå À§¿¡¼­ ÇÁ·Î±×·¥ÀÇ Á¦¸ñÀ» º¸¿©ÁÜ
+		title.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå ExtraBold", 0, 37)); // ÆùÆ® ¼³Á¤
+		title.setHorizontalAlignment(JLabel.CENTER); // Áß¾Ó Á¤·Ä
 		
-		JLabel current = new JLabel(""); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½)
-		current.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", 0, 23)); // ï¿½ï¿½Æ® ï¿½ï¿½ï¿½
-		current.setHorizontalAlignment(JLabel.CENTER); // ï¿½ß¾ï¿½ ï¿½ï¿½ï¿½
+		JLabel current = new JLabel(""); // ÇöÀç ¼³Á¤ÇÑ ±âÁØÀ» º¸¿©ÁÜ(¿ù, ±¹Àû, °ü¶÷°¡)
+		current.setFont(new Font("³ª´®°íµñ", 0, 23)); // ÆùÆ® ¼³Á¤
+		current.setHorizontalAlignment(JLabel.CENTER); // Áß¾Ó Á¤·Ä
 		
-		explain.add(title, BorderLayout.NORTH); // ï¿½Ð³Î¿ï¿½ addï¿½ï¿½ï¿½ï¿½
+		explain.add(title, BorderLayout.NORTH); // ÆÐ³Î¿¡ addÇØÁÜ
 		explain.add(current, BorderLayout.SOUTH);
 		
-		JLabel lYear = new JLabel("ï¿½ï¿½ï¿½ï¿½ ï¿½âµµ"); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ ï¿½ï¿½ï¿½
-		JLabel lMonth = new JLabel("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½");
-		JLabel lNation = new JLabel("ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
-		JLabel lRating = new JLabel("ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
+		JLabel lYear = new JLabel("°³ºÀ ³âµµ"); // ¹«½¼ ¹«½¼ ±âÁØÀÌ ÀÖ´ÂÁö º¸¿©ÁÖ±â À§ÇÔ
+		JLabel lMonth = new JLabel("°³ºÀ ¿ù");
+		JLabel lNation = new JLabel("Á¦ÀÛ ±¹°¡");
+		JLabel lRating = new JLabel("°ü¶÷ ±âÁØ");
 		
-		lYear.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Bold", 0, 18));
-		lMonth.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Bold", 0, 18));
-		lNation.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Bold", 0, 18));
-		lRating.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Bold", 0, 18));
+		lYear.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå Bold", 0, 18));
+		lMonth.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå Bold", 0, 18));
+		lNation.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå Bold", 0, 18));
+		lRating.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå Bold", 0, 18));
 		
-		lYear.setHorizontalAlignment(JLabel.RIGHT); // ï¿½óº§µï¿½ ï¿½ï¿½ï¿½
+		lYear.setHorizontalAlignment(JLabel.RIGHT); // ¶óº§µé Á¤·Ä
 		lMonth.setHorizontalAlignment(JLabel.RIGHT);
 		lNation.setHorizontalAlignment(JLabel.RIGHT);
 		lRating.setHorizontalAlignment(JLabel.RIGHT);
 	
-		String[] strYear = {"ï¿½ï¿½Ã¼", "2016", "2017"}; // ï¿½Þºï¿½ ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-		String[] strMonth = {"ï¿½ï¿½Ã¼", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
-		String[] strNation = {"ï¿½ï¿½Ã¼", "ï¿½Ñ±ï¿½", "ï¿½Ü±ï¿½"};
-		String[] strRating = {"ï¿½ï¿½Ã¼", "ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½", "12ï¿½ï¿½ï¿½Ì»ï¿½ï¿½ï¿½", "15ï¿½ï¿½ï¿½Ì»ï¿½ï¿½ï¿½", "Ã»ï¿½Ò³ï¿½ï¿½ï¿½Ò°ï¿½"};
+		String[] strYear = {"ÀüÃ¼", "2016", "2017"}; // ÄÞº¸ ¹Ú½º ¹®ÀÚ¿­µé ¼±¾ð
+		String[] strMonth = {"ÀüÃ¼", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
+		String[] strNation = {"ÀüÃ¼", "ÇÑ±¹", "¿Ü±¹"};
+		String[] strRating = {"ÀüÃ¼", "ÀüÃ¼°ü¶÷°¡", "12¼¼ÀÌ»ó°ü¶÷°¡", "15¼¼ÀÌ»ó°ü¶÷°¡", "Ã»¼Ò³â°ü¶÷ºÒ°¡"};
 		
-		JComboBox yearChoose = new JComboBox(strYear); // ï¿½Þºï¿½ï¿½Ú½ï¿½ ï¿½ï¿½
+		JComboBox yearChoose = new JComboBox(strYear); // ÄÞº¸¹Ú½º »ý¼º
 		JComboBox monthChoose = new JComboBox(strMonth);
 		JComboBox nationChoose = new JComboBox(strNation);
 		JComboBox ratingChoose = new JComboBox(strRating);
 		
-		yearChoose.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Regular", 0, 15));
-		monthChoose.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Regular", 0, 15));
-		nationChoose.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Regular", 0, 15));
-		ratingChoose.setFont(new Font("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Regular", 0, 15));
+		yearChoose.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå Regular", 0, 15));
+		monthChoose.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå Regular", 0, 15));
+		nationChoose.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå Regular", 0, 15));
+		ratingChoose.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå Regular", 0, 15));
 	
-		standard.add(lYear); // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Òµï¿½ï¿½ ï¿½Ð³Î¿ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½
+		standard.add(lYear); // ±âÁØÀ» ¼±ÅÃÇÏ±â À§ÇÑ ¿ä¼ÒµéÀ» ÆÐ³Î¿¡ Ãß°¡ÇØÁÜ
 		standard.add(yearChoose);
 		standard.add(lMonth);
 		standard.add(monthChoose);
@@ -100,21 +105,21 @@ public class View extends JFrame{
 		standard.add(lRating);
 		standard.add(ratingChoose);
 		
-		JButton[] btn = new JButton[8]; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½
+		JButton[] btn = new JButton[8]; // °¢°¢ÀÇ ±â´ÉÀ» À§ÇÑ ¹öÆ° ¼±¾ð
 		
-		btn[0] = new JButton("ï¿½ï¿½ï¿½"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½
-		btn[1] = new JButton("ï¿½ï¿½ï¿½ï¿½ï¿½");
-		btn[2] = new JButton("È¿ï¿½ï¿½ï¿½");
-		btn[3] = new JButton("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
-		btn[4] = new JButton("ï¿½å¸£ï¿½ï¿½");
-		btn[5] = new JButton("ï¿½Ü¾îº°");
-		btn[6] = new JButton("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
-		btn[7] = new JButton("ï¿½Ê±ï¿½È­");
+		btn[0] = new JButton("°ü°´¼ö"); // °¢°¢ÀÇ ¹öÆ° »ý¼º
+		btn[1] = new JButton("¸ÅÃâ¾×");
+		btn[2] = new JButton("È¿À²¼º");
+		btn[3] = new JButton("°¨µ¶º°");
+		btn[4] = new JButton("Àå¸£º°");
+		btn[5] = new JButton("´Ü¾îº°");
+		btn[6] = new JButton("ÈïÇàÀÛ");
+		btn[7] = new JButton("ÃÊ±âÈ­");
 		
-		for(int i=0; i<8; i++) { // ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½
+		for(int i=0; i<8; i++) { // ¹öÆ°µéÀÇ ¼Ó¼º ¼³Á¤
 			
 			btn[i].setForeground(Color.BLACK);
-			btn[i].setFont(new Font("ï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½", 0, 27));
+			btn[i].setFont(new Font("³ª´®¹Ù¸¥Ææ", 0, 27));
 			
 			btn[i].setBorderPainted(false);
 			btn[i].setContentAreaFilled(false);
@@ -122,9 +127,9 @@ public class View extends JFrame{
 			
 		} // for
 		
-		btn[7].setForeground(Color.WHITE); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ ï¿½Ê±ï¿½È­ ï¿½ï¿½Æ°ï¿½Ì¹Ç·ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+		btn[7].setForeground(Color.WHITE); // ¸¶Áö¸· ¹öÆ°Àº ÃÊ±âÈ­ ¹öÆ°ÀÌ¹Ç·Î µû·Î ¼³Á¤
 		
-		func1.add(btn[0]); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ ï¿½Ð³Î¿ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½
+		func1.add(btn[0]); // °¢°¢ÀÇ ¹öÆ°µéÀ» ÆÐ³Î¿¡ Ãß°¡ÇØÁÜ
 		func1.add(btn[1]);
 		func1.add(btn[2]);
 		func1.add(btn[3]);
@@ -134,9 +139,9 @@ public class View extends JFrame{
 		func2.add(btn[6]);
 		func2.add(btn[7]);
 		
-		JTextArea[] resultText = new JTextArea[4]; // ï¿½Ð¼ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ ï¿½ï¿½ï¿½ TextArea ï¿½ï¿½ï¿½ï¿½
+		JTextArea[] resultText = new JTextArea[4]; // ºÐ¼® °á°ú¸¦ º¸¿©ÁÖ±â À§ÇÑ TextArea ¼±¾ð
 		
-		for(int i=0; i<4; i++) { // ï¿½ï¿½, Å©ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ï¿½ï¿½ ï¿½ï¿½Æ® ï¿½ï¿½ï¿½, ï¿½ß°ï¿½
+		for(int i=0; i<4; i++) { // »ý¼º, Å©±â¿Í ¼Ó¼º°ú ÆùÆ® ¼³Á¤, Ãß°¡
 			
 			resultText[i] = new JTextArea();
 			resultText[i].setPreferredSize(new Dimension(200,340));
@@ -146,193 +151,193 @@ public class View extends JFrame{
 			
 		} // for
 		
-		JLabel[] resultStandard = new JLabel[4]; // ï¿½Ð¼ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ ï¿½ï¿½ï¿½ ï¿½óº§µï¿½ ï¿½ï¿½ï¿½ï¿½
+		JLabel[] resultStandard = new JLabel[4]; // ºÐ¼® ÁöÇ¥¸¦ º¸¿©ÁÖ±â À§ÇÑ ¶óº§µé ¼±¾ð
 		
-		for(int i=0; i<4; i++) { // ï¿½óº§µï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð³Î¿ï¿½ ï¿½ß°ï¿½
+		for(int i=0; i<4; i++) { // ¶óº§µé »ý¼º ¹× ÆùÆ® ¼³Á¤ÈÄ ÆÐ³Î¿¡ Ãß°¡
 			
 			resultStandard[i] = new JLabel("");
-			resultStandard[i].setFont(new Font("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", 1, 18));
+			resultStandard[i].setFont(new Font("³ª´®°íµñ", 1, 18));
 			showResult.add(resultStandard[i]);
 			
 		} // for
 		
-		JDialog inputDr = new JDialog(this, "ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½Ô·ï¿½"); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½Ô·ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½Î±ï¿½ Ã¢ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½
-		inputDr.setLayout(new FlowLayout()); // ï¿½ï¿½ï¿½Ì¾Æ¿ï¿½ ï¿½ï¿½ï¿½
-		inputDr.setSize(280,80); // Å©ï¿½ï¿½ ï¿½ï¿½ï¿½
-		inputDr.setLocation(200,200); // ï¿½Ä¡ ï¿½ï¿½ï¿½
-		inputDr.setVisible(false); // Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+		JDialog inputDr = new JDialog(this, "°¨µ¶ ÀÌ¸§ ÀÔ·Â"); // °¨µ¶ ÀÌ¸§ ÀÔ·ÂÀ» À§ÇÑ ´ÙÀÌ¾ó·Î±× Ã¢ ¼±¾ð ¹× »ý¼º
+		inputDr.setLayout(new FlowLayout()); // ·¹ÀÌ¾Æ¿ô ¼³Á¤
+		inputDr.setSize(280,80); // Å©±â ¼³Á¤
+		inputDr.setLocation(200,200); // À§Ä¡ ¼³Á¤
+		inputDr.setVisible(false); // Ã³À½¿¡´Â º¸ÀÌÁö ¾ÊÀ½
 		
-		JTextField inputTextDr = new JTextField(12); // ï¿½Ô·ï¿½ Ã¢ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½
-		JButton inputDrButton = new JButton("ï¿½Ô·ï¿½"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½
-		JButton closeDrButton = new JButton("ï¿½ï¿½ï¿½");
+		JTextField inputTextDr = new JTextField(12); // ÀÔ·Â Ã¢ ¼±¾ð ¹× »ý¼º
+		JButton inputDrButton = new JButton("ÀÔ·Â"); // °¢°¢ÀÇ ¹öÆ° ¼±¾ð ¹× »ý¼º
+		JButton closeDrButton = new JButton("Ãë¼Ò");
 		
-		inputDr.add(inputTextDr); // ï¿½ï¿½ï¿½Ì¾ï¿½Î±ï¿½ Ã¢ï¿½ï¿½ ï¿½ß°ï¿½
+		inputDr.add(inputTextDr); // ´ÙÀÌ¾ó·Î±× Ã¢¿¡ Ãß°¡
 		inputDr.add(inputDrButton);
 		inputDr.add(closeDrButton);
 		
-		JDialog inputWord = new JDialog(this, "ï¿½Ü¾ï¿½ ï¿½Ô·ï¿½"); // ï¿½Ü¾ï¿½ ï¿½Ô·ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½Î±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½
-		inputWord.setLayout(new FlowLayout()); // ï¿½ï¿½ï¿½Ì¾Æ¿ï¿½ ï¿½ï¿½ï¿½
-		inputWord.setSize(280,80); // Å©ï¿½ï¿½ ï¿½ï¿½ï¿½
-		inputWord.setLocation(200,200); // ï¿½Ä¡ ï¿½ï¿½ï¿½
-		inputWord.setVisible(false); // Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+		JDialog inputWord = new JDialog(this, "´Ü¾î ÀÔ·Â"); // ´Ü¾î ÀÔ·ÂÀ» À§ÇÑ ´ÙÀÌ¾ó·Î±× ¼±¾ð ¹× »ý¼º
+		inputWord.setLayout(new FlowLayout()); // ·¹ÀÌ¾Æ¿ô ¼³Á¤
+		inputWord.setSize(280,80); // Å©±â ¼³Á¤
+		inputWord.setLocation(200,200); // À§Ä¡ ¼³Á¤
+		inputWord.setVisible(false); // Ã³À½¿¡´Â º¸ÀÌÁö ¾ÊÀ½
 		
-		JTextField inputTextWord = new JTextField(12); // ï¿½Ô·ï¿½ Ã¢ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½
-		JButton inputWordButton = new JButton("ï¿½Ô·ï¿½"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½
-		JButton closeWordButton = new JButton("ï¿½ï¿½ï¿½");
+		JTextField inputTextWord = new JTextField(12); // ÀÔ·Â Ã¢ ¼±¾ð ¹× »ý¼º
+		JButton inputWordButton = new JButton("ÀÔ·Â"); // °¢°¢ÀÇ ¹öÆ° ¼±¾ð ¹× »ý¼º
+		JButton closeWordButton = new JButton("Ãë¼Ò");
 		
-		inputWord.add(inputTextWord); // ï¿½ï¿½ï¿½Ì¾ï¿½Î±ï¿½ Ã¢ï¿½ï¿½ ï¿½ß°ï¿½
+		inputWord.add(inputTextWord); // ´ÙÀÌ¾ó·Î±× Ã¢¿¡ Ãß°¡
 		inputWord.add(inputWordButton);
 		inputWord.add(closeWordButton);
 		
 		
-		DecimalFormat form = new DecimalFormat("#,###"); // Ãµï¿½ï¿½ ï¿½Ú¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½
+		DecimalFormat form = new DecimalFormat("#,###"); // ÃµÀÇ ÀÚ¸®¸¶´Ù ½°Ç¥¸¦ Âï±â À§ÇÑ °´Ã¼ ¼±¾ð ¹× »ý¼º
 		
-		btn[0].addActionListener(new ActionListener() { // ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¼ï¿½
+		btn[0].addActionListener(new ActionListener() { // °ü°´ ¼ö ±âÁØ ºÐ¼®
 			
 			public void actionPerformed(ActionEvent arg0) {
 				
-				current.setText(chooseStandard(yearChoose, monthChoose, nationChoose, ratingChoose) + " ï¿½ï¿½ ï¿½ï¿½ ï¿½Ð¼ï¿½"); // ï¿½Þºï¿½ ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
-				datas = md.sortPNum(yearChoose.getSelectedItem().toString(), monthChoose.getSelectedItem().toString(), // ï¿½Ð¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½
+				current.setText(chooseStandard(yearChoose, monthChoose, nationChoose, ratingChoose) + " °ü°´ ¼ö ºÐ¼®"); // ÄÞº¸ ¹Ú½º·Î ¼±ÅÃÇÑ ±âÁØ Àû¿ëÈÄ Ç¥½Ã
+				datas = md.sortPNum(yearChoose.getSelectedItem().toString(), monthChoose.getSelectedItem().toString(), // ºÐ¼®ÇÑ °á°ú¸¦ ¹Þ¾Æ¼­ ÀúÀå
 									nationChoose.getSelectedItem().toString(), ratingChoose.getSelectedItem().toString());
 				
-				for(int i=0; i<4; i++) // ï¿½Ð¼ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ ï¿½ï¿½ï¿½ TextAreaï¿½ï¿½ ï¿½Ê±ï¿½È­
+				for(int i=0; i<4; i++) // ºÐ¼® °á°ú¸¦ º¸¿©ÁÖ±â À§ÇÑ TextArea¸¦ ÃÊ±âÈ­
 					resultText[i].setText("");
 				
-				resultStandard[0].setText("ï¿½ï¿½È­ ï¿½ï¿½ï¿½"); // ï¿½Ð¼ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½
-				resultStandard[1].setText("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥");
-				resultStandard[2].setText("ï¿½ï¿½ï¿½");
-				resultStandard[3].setText("ï¿½ï¿½ï¿½ ï¿½Î¿ï¿½");
+				resultStandard[0].setText("¿µÈ­ Á¦¸ñ"); // ºÐ¼® ÁöÇ¥ ¸í½Ã
+				resultStandard[1].setText("°³ºÀ ³¯Â¥");
+				resultStandard[2].setText("°ü¶÷°¡");
+				resultStandard[3].setText("°ü¶÷ ÀÎ¿ø");
 				
-				for(Movie m : datas) { // ï¿½Ð¼ï¿½ ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
+				for(Movie m : datas) { // ºÐ¼® °á°ú Ç¥½Ã
 					resultText[0].append(m.getMvname() + "\n");
 					resultText[1].append(m.getOpendate() + "\n");
 					resultText[2].append(m.getRating() + "\n");
-					resultText[3].append(form.format(m.getNumPeople()) + "ï¿½ï¿½\n");
+					resultText[3].append(form.format(m.getNumPeople()) + "¸í\n");
 				}
 			}			
 		});
 		
-		btn[1].addActionListener(new ActionListener() { // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¼ï¿½
+		btn[1].addActionListener(new ActionListener() { // ¸ÅÃâ¾× ±âÁØ ºÐ¼®
 			
 			public void actionPerformed(ActionEvent arg0) {
 				
-				current.setText(chooseStandard(yearChoose, monthChoose, nationChoose, ratingChoose) + " ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¼ï¿½");
+				current.setText(chooseStandard(yearChoose, monthChoose, nationChoose, ratingChoose) + " ¸ÅÃâ¾× ºÐ¼®");
 				datas = md.sortIncome(yearChoose.getSelectedItem().toString(), monthChoose.getSelectedItem().toString(), 
 									nationChoose.getSelectedItem().toString(), ratingChoose.getSelectedItem().toString());
 
 				for(int i=0; i<4; i++)
 					resultText[i].setText("");
 				
-				resultStandard[0].setText("ï¿½ï¿½È­ ï¿½ï¿½ï¿½");
-				resultStandard[1].setText("ï¿½ï¿½ï¿½ï¿½");
-				resultStandard[2].setText("ï¿½ï¿½ï¿½");
-				resultStandard[3].setText("ï¿½ï¿½ï¿½ï¿½ï¿½");
+				resultStandard[0].setText("¿µÈ­ Á¦¸ñ");
+				resultStandard[1].setText("°¨µ¶");
+				resultStandard[2].setText("°ü¶÷°¡");
+				resultStandard[3].setText("¸ÅÃâ¾×");
 				
 				for(Movie m : datas) {
 					resultText[0].append(m.getMvname() + "\n");
 					resultText[1].append(m.getDrname() + "\n");
 					resultText[2].append(m.getRating() + "\n");
-					resultText[3].append(form.format(m.getIncome()) + "ï¿½ï¿½\n");
+					resultText[3].append(form.format(m.getIncome()) + "¿ø\n");
 				}
 			}			
 		});
 		
-		btn[2].addActionListener(new ActionListener() { // È¿ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ / ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½) ï¿½Ð¼ï¿½
+		btn[2].addActionListener(new ActionListener() { // È¿À²¼º(¸ÅÃâ¾× / ½ºÅ©¸° ¼ö) ºÐ¼®
 			
 			public void actionPerformed(ActionEvent arg0) {
 				
-				current.setText(chooseStandard(yearChoose, monthChoose, nationChoose, ratingChoose) + " È¿ï¿½ï¿½ï¿½ ï¿½Ð¼ï¿½");
+				current.setText(chooseStandard(yearChoose, monthChoose, nationChoose, ratingChoose) + " È¿À²¼º ºÐ¼®");
 				datas = md.sortEffeciency(yearChoose.getSelectedItem().toString(), monthChoose.getSelectedItem().toString(), 
 									nationChoose.getSelectedItem().toString(), ratingChoose.getSelectedItem().toString());
 				
 				for(int i=0; i<4; i++)
 					resultText[i].setText("");
 				
-				resultStandard[0].setText("ï¿½ï¿½È­ ï¿½ï¿½ï¿½");
-				resultStandard[1].setText("ï¿½å¸£");
-				resultStandard[2].setText("ï¿½ï¿½ï¿½");
-				resultStandard[3].setText("ï¿½ï¿½Å©ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
+				resultStandard[0].setText("¿µÈ­ Á¦¸ñ");
+				resultStandard[1].setText("Àå¸£");
+				resultStandard[2].setText("°ü¶÷°¡");
+				resultStandard[3].setText("½ºÅ©¸°´ç ¼öÀÔ");
 				
 				for(Movie m : datas) {
 					resultText[0].append(m.getMvname() + "\n");
 					resultText[1].append(m.getGenre() + "\n");
 					resultText[2].append(m.getRating() + "\n");
-					resultText[3].append(form.format(m.getIncome() / m.getNumScreen()) + "ï¿½ï¿½\n");
+					resultText[3].append(form.format(m.getIncome() / m.getNumScreen()) + "¿ø\n");
 				}
 			}			
 		});
 		
-		btn[3].addActionListener(new ActionListener() { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¼ï¿½
+		btn[3].addActionListener(new ActionListener() { // °¨µ¶º° ºÐ¼®
 			
 			public void actionPerformed(ActionEvent arg0) {
 				
-				inputDr.setVisible(true); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½Ô·ï¿½ï¿½ ï¿½ï¿½ï¿½ Ã¢ï¿½ ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½ï¿½
+				inputDr.setVisible(true); // °¨µ¶ ÀÌ¸§ ÀÔ·ÂÀ» À§ÇÑ Ã¢À» º¸ÀÌ°Ô ÇÔ
 				
 			}			
 		});
 		
-		btn[4].addActionListener(new ActionListener() { // ï¿½å¸£ï¿½ï¿½ ï¿½Ð¼ï¿½
+		btn[4].addActionListener(new ActionListener() { // Àå¸£º° ºÐ¼®
 			
 			public void actionPerformed(ActionEvent arg0) {
 				
-				current.setText("ï¿½å¸£ï¿½ï¿½ ï¿½Ð¼ï¿½");
-				datas = md.sortTheme(); // ï¿½å¸£ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½Þºï¿½ ï¿½Ú½ï¿½ ï¿½Ì»ï¿½ï¿½)
+				current.setText("Àå¸£º° ºÐ¼®");
+				datas = md.sortTheme(); // Àå¸£º°·Î ºÐ¼®ÇÑ °á°ú¸¦ ÀúÀå(ÄÞº¸ ¹Ú½º ¹Ì»ç¿ë)
 				
 				for(int i=0; i<4; i++)
 					resultText[i].setText("");
 				
-				resultStandard[0].setText("ï¿½å¸£");
-				resultStandard[1].setText("ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½");
-				resultStandard[2].setText("ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½");
+				resultStandard[0].setText("Àå¸£");
+				resultStandard[1].setText("¿µÈ­ °³¼ö");
+				resultStandard[2].setText("Æò±Õ ¸ÅÃâ¾×");
 				resultStandard[3].setText("");
 				
 				for(Movie m : datas) {
 					resultText[0].append(m.getGenre() + "\n");
-					resultText[1].append(m.getNumScreen() + "ï¿½ï¿½\n");
-					resultText[2].append(form.format(m.getFResult()) + "ï¿½ï¿½\n");
+					resultText[1].append(m.getNumScreen() + "°³\n");
+					resultText[2].append(form.format(m.getFResult()) + "¿ø\n");
 				}
 			}			
 		});
 		
-		btn[5].addActionListener(new ActionListener() { // ï¿½Ü¾îº° ï¿½Ð¼ï¿½
+		btn[5].addActionListener(new ActionListener() { // ´Ü¾îº° ºÐ¼®
 			
 			public void actionPerformed(ActionEvent arg0) {
 				
-				inputWord.setVisible(true); // ï¿½Ü¾ï¿½ ï¿½Ô·ï¿½ï¿½ ï¿½ï¿½ï¿½ Ã¢ï¿½ ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½ï¿½
+				inputWord.setVisible(true); // ´Ü¾î ÀÔ·ÂÀ» À§ÇÑ Ã¢À» º¸ÀÌ°Ô ÇÔ
 				
 			}			
 		});
 		
-		btn[6].addActionListener(new ActionListener() { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¼ï¿½
+		btn[6].addActionListener(new ActionListener() { // ÈïÇàÀÛ ºÐ¼®
 			
 			public void actionPerformed(ActionEvent arg0) {
 				
-				current.setText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¼ï¿½");
+				current.setText("ÈïÇàÀÛ ºÐ¼®");
 				
 				datas = md.sortSuccess();
 				
 				for(int i=0; i<4; i++)
 					resultText[i].setText("");
 				
-				resultStandard[0].setText("ï¿½ï¿½È­ ï¿½ï¿½ï¿½");
-				resultStandard[1].setText("ï¿½ï¿½ï¿½ï¿½ï¿½");
-				resultStandard[2].setText("ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½");
-				resultStandard[3].setText("ï¿½ï¿½ï¿½ ï¿½ï¿½");
+				resultStandard[0].setText("¿µÈ­ Á¦¸ñ");
+				resultStandard[1].setText("¸ÅÃâ¾×");
+				resultStandard[2].setText("½ºÅ©¸° ¼ö");
+				resultStandard[3].setText("°ü¶÷°´ ¼ö");
 				
 				for(Movie m : datas) {
 					resultText[0].append(m.getMvname() + "\n");
-					resultText[1].append(form.format(m.getIncome()) + "ï¿½ï¿½\n");
-					resultText[2].append(form.format(m.getNumScreen()) + "ï¿½ï¿½\n");
-					resultText[3].append(form.format(m.getNumPeople()) + "ï¿½ï¿½\n");
+					resultText[1].append(form.format(m.getIncome()) + "¿ø\n");
+					resultText[2].append(form.format(m.getNumScreen()) + "°³\n");
+					resultText[3].append(form.format(m.getNumPeople()) + "¸í\n");
 				}
 			}			
 		});
 		
-		btn[7].addActionListener(new ActionListener() { // ï¿½Ê±ï¿½È­
+		btn[7].addActionListener(new ActionListener() { // ÃÊ±âÈ­
 			
 			public void actionPerformed(ActionEvent arg0) {
 				
-				for(int i=0; i<4; i++) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ TextAreaï¿½ï¿½ Labelï¿½ ï¿½Ê±ï¿½È­ 
+				for(int i=0; i<4; i++) { // °¢°¢ÀÇ TextArea¿Í LabelÀ» ÃÊ±âÈ­ 
 					
 					resultText[i].setText("");
 					resultStandard[i].setText("");
@@ -343,62 +348,62 @@ public class View extends JFrame{
 			}
 		});
 		
-		inputDrButton.addActionListener(new ActionListener() { // ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½Ô·ï¿½ Ã¢ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+		inputDrButton.addActionListener(new ActionListener() { // °¨µ¶ ÀÌ¸§ ÀÔ·Â Ã¢¿¡¼­ ÀÔ·Â ¼±ÅÃ ½Ã
 			
 			public void actionPerformed(ActionEvent arg0) {
 				
-				inputDr.setVisible(false); // ï¿½Ô·ï¿½ Ã¢ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½ï¿½
-				current.setText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¼ï¿½"); // ï¿½Ð¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+				inputDr.setVisible(false); // ÀÔ·Â Ã¢À» º¸ÀÌÁö ¾Ê°Ô ÇÔ
+				current.setText("°¨µ¶º° ºÐ¼®"); // ºÐ¼® ±âÁØ º¯°æ
 				
-				datas = md.sortDirector(inputTextDr.getText().toString()); // ï¿½Ð¼ï¿½ ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½
+				datas = md.sortDirector(inputTextDr.getText().toString()); // ºÐ¼® °á°ú¸¦ ¹Þ¾Æ¼­ ÀúÀå
 				
 				for(int i=0; i<4; i++)
 					resultText[i].setText("");
 				
-				resultStandard[0].setText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"); // ï¿½Ð¼ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½
-				resultStandard[1].setText("ï¿½ï¿½È­ ï¿½ï¿½ï¿½");
-				resultStandard[2].setText("ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½");
-				resultStandard[3].setText("ï¿½ï¿½ï¿½ï¿½ï¿½");				
+				resultStandard[0].setText("°¨µ¶¸í"); // ºÐ¼® ÁöÇ¥ ¸í½Ã
+				resultStandard[1].setText("¿µÈ­ Á¦¸ñ");
+				resultStandard[2].setText("½ºÅ©¸° ¼ö");
+				resultStandard[3].setText("¸ÅÃâ¾×");				
 
-				for(Movie m : datas) { // ï¿½Ð¼ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+				for(Movie m : datas) { // ºÐ¼® °á°ú¸¦ º¸¿©ÁÜ
 					resultText[0].append(m.getDrname() + "\n");
 					resultText[1].append(m.getMvname() + "\n");
-					resultText[2].append(form.format(m.getNumScreen()) + "ï¿½ï¿½\n");
-					resultText[3].append(form.format(m.getIncome()) + "ï¿½ï¿½\n");
+					resultText[2].append(form.format(m.getNumScreen()) + "°³\n");
+					resultText[3].append(form.format(m.getIncome()) + "¿ø\n");
 				}
 				
 				inputTextDr.setText("");
 			}		
 		});
 		
-		closeDrButton.addActionListener(new ActionListener() { // ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½Ô·ï¿½ Ã¢ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+		closeDrButton.addActionListener(new ActionListener() { // °¨µ¶ ÀÌ¸§ ÀÔ·Â Ã¢¿¡¼­ Ãë¼Ò ¼±ÅÃ ½Ã
 			
 			public void actionPerformed(ActionEvent arg0) {
 				
-				inputDr.setVisible(false); // ï¿½Ô·ï¿½ Ã¢ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½ï¿½
-				inputTextDr.setText(""); // ï¿½Ø½ï¿½Æ® Ã¢ ï¿½ï¿½ï¿½
-				inputDr.setSize(280,80); // Å©ï¿½ï¿½ ï¿½ç¼³ï¿½
-				inputDr.setLocation(200,200); // ï¿½Ä¡ ï¿½ç¼³ï¿½
+				inputDr.setVisible(false); // ÀÔ·Â Ã¢À» º¸ÀÌÁö ¾Ê°Ô ÇÔ
+				inputTextDr.setText(""); // ÅØ½ºÆ® Ã¢ ºñ¿ò
+				inputDr.setSize(280,80); // Å©±â Àç¼³Á¤
+				inputDr.setLocation(200,200); // À§Ä¡ Àç¼³Á¤
 				
 			}			
 		});
 		
-		inputWordButton.addActionListener(new ActionListener() { // ï¿½Ü¾ï¿½ ï¿½Ô·ï¿½ Ã¢ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+		inputWordButton.addActionListener(new ActionListener() { // ´Ü¾î ÀÔ·Â Ã¢¿¡¼­ ÀÔ·Â ¼±ÅÃ ½Ã
 			
 			public void actionPerformed(ActionEvent arg0) {
 				
-				inputWord.setVisible(false); // Ã¢ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½ï¿½
-				current.setText("ï¿½Ü¾îº° ï¿½Ð¼ï¿½");
+				inputWord.setVisible(false); // Ã¢À» º¸ÀÌÁö ¾Ê°Ô ÇÔ
+				current.setText("´Ü¾îº° ºÐ¼®");
 				
-				datas = md.sortWord(inputTextWord.getText().toString()); // ï¿½Ð¼ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+				datas = md.sortWord(inputTextWord.getText().toString()); // ºÐ¼® °á°ú¸¦ ÀúÀå
 				
 				for(int i=0; i<4; i++)
 					resultText[i].setText("");
 				
-				resultStandard[0].setText("ï¿½ï¿½È­ ï¿½ï¿½ï¿½");
-				resultStandard[1].setText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
-				resultStandard[2].setText("ï¿½å¸£");
-				resultStandard[3].setText("ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½");
+				resultStandard[0].setText("¿µÈ­ Á¦¸ñ");
+				resultStandard[1].setText("°³ºÀÀÏ");
+				resultStandard[2].setText("Àå¸£");
+				resultStandard[3].setText("°ü¶÷ µî±Þ");
 
 				for(Movie m : datas) {
 					resultText[0].append(m.getMvname() + "\n");
@@ -411,7 +416,7 @@ public class View extends JFrame{
 			}			
 		});
 		
-		closeWordButton.addActionListener(new ActionListener() { // ï¿½Ü¾ï¿½ ï¿½Ð¼ï¿½ Ã¢ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ ï¿½ï¿½
+		closeWordButton.addActionListener(new ActionListener() { // ´Ü¾î ºÐ¼® Ã¢¿¡¼­ Ãë¼Ò Å¬¸¯ ½Ã
 			
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -423,26 +428,26 @@ public class View extends JFrame{
 			}			
 		});
 			
-		setSize(830, 800); // GUI Å©ï¿½ï¿½ ï¿½ï¿½ï¿½
+		setSize(830, 800); // GUI Å©±â ¼³Á¤
 		setVisible(true);
 		
 	} // view
 	
-	public String chooseStandard(JComboBox yearChoose, JComboBox monthChoose, JComboBox nationChoose, JComboBox ratingChoose) { // ï¿½Þºï¿½ ï¿½Ú½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	public String chooseStandard(JComboBox yearChoose, JComboBox monthChoose, JComboBox nationChoose, JComboBox ratingChoose) { // ÄÞº¸ ¹Ú½º¿¡¼­ ¼±ÅÃÇÑ °ªµé¿¡ ´ëÇÑ Á¶ÇÕ
 		
-		String selectedYear = (yearChoose.getSelectedItem().toString().equals("ï¿½ï¿½Ã¼"))? // ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½È¯ X
-				"" : (yearChoose.getSelectedItem().toString() +"ï¿½ï¿½"); // ï¿½ï¿½ ï¿½Ì¿Ü¿ï¿½ ï¿½âµµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È¯
+		String selectedYear = (yearChoose.getSelectedItem().toString().equals("ÀüÃ¼"))? // ÀüÃ¼¸¦ ¼±ÅÃÇÏ¸é ¹ÝÈ¯ X
+				"" : (yearChoose.getSelectedItem().toString() +"³â"); // ±× ÀÌ¿Ü¿¡ ³âµµ¸¦ ¼±ÅÃÇÏ¸é ¹®ÀÚ¿­À» ºÙÀÎ ÈÄ ¹ÝÈ¯
 		
-		String selectedMonth = (monthChoose.getSelectedItem().toString().equals("ï¿½ï¿½Ã¼"))? // ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½È¯ X
-				"" : (" " + monthChoose.getSelectedItem().toString() +"ï¿½ï¿½"); // ï¿½ï¿½ ï¿½Ì¿Ü¿ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È¯
+		String selectedMonth = (monthChoose.getSelectedItem().toString().equals("ÀüÃ¼"))? // ÀüÃ¼¸¦ ¼±ÅÃÇÏ¸é ¹ÝÈ¯ X
+				"" : (" " + monthChoose.getSelectedItem().toString() +"¿ù"); // ±× ÀÌ¿Ü¿¡ ´ÞÀ» ¼±ÅÃÇÏ¸é ¹®ÀÚ¿­À» ºÙÀÎ ÈÄ ¹ÝÈ¯
 		
-		String selectedNation = (nationChoose.getSelectedItem().toString().equals("ï¿½ï¿½Ã¼"))? // ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½Ã½ï¿½ ï¿½ï¿½È¯ X
-				"" : (" " + nationChoose.getSelectedItem().toString()); // ï¿½ï¿½ ï¿½Ì¿Ü¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
+		String selectedNation = (nationChoose.getSelectedItem().toString().equals("ÀüÃ¼"))? // ÀüÃ¼ ¼±ÅÃ½Ã ¹ÝÈ¯ X
+				"" : (" " + nationChoose.getSelectedItem().toString()); // ±× ÀÌ¿Ü¿¡ ¼±ÅÃÇÑ ±¹Àû ¹ÝÈ¯
 		
-		String selectedRating = (ratingChoose.getSelectedItem().toString().equals("ï¿½ï¿½Ã¼"))?
-				"" : (" " + ratingChoose.getSelectedItem().toString()); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
+		String selectedRating = (ratingChoose.getSelectedItem().toString().equals("ÀüÃ¼"))?
+				"" : (" " + ratingChoose.getSelectedItem().toString()); // ¼±ÅÃÇÑ °ü¶÷°¡ ¹ÝÈ¯
 		
-		return selectedYear + selectedMonth + selectedNation + selectedRating; // ï¿½ï¿½ï¿½Ú¿ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È¯
+		return selectedYear + selectedMonth + selectedNation + selectedRating; // ¹®ÀÚ¿­ Á¶ÇÕ ÈÄ ¹ÝÈ¯
 		
 	} // chooseStandard
 
