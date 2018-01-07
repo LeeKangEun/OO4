@@ -1,3 +1,8 @@
+
+/*
+ * 18.01.07 최종본 
+ */
+
 public class AppMain {
 	
 	private static AppMain s_instance; // 싱글톤 패턴을 적용하기 위함

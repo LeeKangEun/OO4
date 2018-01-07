@@ -1,5 +1,10 @@
 import java.util.Date;
 
+
+/*
+ * 18.01.07 최종본 
+ */
+
 public class Movie {
 	
 	// 영화 정보 변수들 

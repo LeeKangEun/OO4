@@ -1,6 +1,10 @@
 import java.sql.*;
 import java.util.*;
 
+
+/*
+ * 18.01.07 최종본 
+ */
 public class MovieDAO {
 	
 	// DB 연동에 사용하는 변수 및 객체 
@@ -61,7 +65,7 @@ public class MovieDAO {
 	    ArrayList<Movie> datas = new ArrayList<Movie>();
 	      
 	    sql += searchReq(_year, _month, _nation, _rating); // 검색 조건에 맞는 sql문 작성 
-	      
+
 	    sql += " order by num_people desc limit 15"; // 추가 검색조건 삽입 
 	      
 	    try{
@@ -94,7 +98,6 @@ public class MovieDAO {
 	   }
 	      
 	   closeDB(); // DB 연결 종료 
-	   
 	   
 	   return datas;
 	} // sortPNum(), DB에서 조건에 맞는 데이터를 가져옴

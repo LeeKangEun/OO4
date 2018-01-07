@@ -4,6 +4,12 @@ import java.text.*;
 import java.util.*;
 import javax.swing.*;
 
+
+
+/*
+ * 18.01.07 최종본 
+ */
+
 public class View extends JFrame{
 	
 	ArrayList<Movie> datas; // DB에서 받아온 영화 정보를 저장 할 변수 
